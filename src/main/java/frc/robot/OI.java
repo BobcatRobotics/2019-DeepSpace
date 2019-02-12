@@ -1,9 +1,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.buttons.Trigger;
+// import edu.wpi.first.wpilibj.buttons.Button;
+// import edu.wpi.first.wpilibj.buttons.JoystickButton;
+// import edu.wpi.first.wpilibj.buttons.Trigger;
 import frc.robot.lib.RioLogger;
 import frc.robot.lib.RioLoggerThread;
 import frc.robot.lib.SmartDashLog;
@@ -33,15 +33,7 @@ public class OI {
   //public static Trigger trigShifter = new JoystickButton(rightStick, RobotMap.rightJoystickShifter);
 
   static {
-    // Initialize Drive Train
-    driveTrain.setRightMotors(RobotMap.driveRightMotorFront, RobotMap.driveRightMotorMiddle,
-        RobotMap.driveRightMotorRear);
-    driveTrain.setLeftMotors(RobotMap.driveLeftMotorFront, RobotMap.driveLeftMotorMiddle, RobotMap.driveLeftMotorRear);
-
-    driveTrain.setLeftMotorsReverse(false);
-    driveTrain.setLeftEncoder(RobotMap.leftEncoderChannel1, RobotMap.leftEncoderChannel2);
-    driveTrain.setRightEncoder(RobotMap.rightEncoderChannel1, RobotMap.rightEncoderChannel2);
-
+   
     // Start Logging Thread
     logFile = RioLoggerThread.getInstance();
     RioLogger.log("OI static block finished.");

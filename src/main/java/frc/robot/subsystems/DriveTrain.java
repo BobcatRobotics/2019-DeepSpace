@@ -1,8 +1,9 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.PWMTalonSRX;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.PWMTalonSRX;
+import frc.robot.RobotMap;
 
 public class DriveTrain extends Subsystem {
 	/** Inverts drive direction **/
@@ -14,18 +15,23 @@ public class DriveTrain extends Subsystem {
 	private PWMTalonSRX rightFront;
 	private PWMVictorSPX rightMiddle;
 	private PWMVictorSPX rightRear;
-	
 	private GrayHill leftEncoder;
 	private GrayHill rightEncoder;
-	
 	private boolean invertLeft = true;
-	
 	private double leftPower = 0.0;
 	private double rightPower = 0.0;
+
+	public DriveTrain() {
+		// Initialize Drive Train
+		setRightMotors(RobotMap.driveRightMotorFront, RobotMap.driveRightMotorMiddle,RobotMap.driveRightMotorRear);
+		setLeftMotors(RobotMap.driveLeftMotorFront, RobotMap.driveLeftMotorMiddle, RobotMap.driveLeftMotorRear);
+		setLeftMotorsReverse(false);
+		setLeftEncoder(RobotMap.leftEncoderChannel1, RobotMap.leftEncoderChannel2);
+		setRightEncoder(RobotMap.rightEncoderChannel1, RobotMap.rightEncoderChannel2);
+	}
 	
 	
-	// Put methods for controlling this subsystem
-  	// here. Call these from Commands.
+	// Put methods for controlling this subsystem here. Call these from Commands.
 	public void setLeftMotors(int lf,int lm,int lr) {
 		leftFront = new PWMTalonSRX(lf);
 		leftMiddle = new PWMVictorSPX(lm);
