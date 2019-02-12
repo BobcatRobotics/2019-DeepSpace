@@ -8,16 +8,13 @@
 package frc.robot.commands;
 
 import frc.robot.OI;
-import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * The base command for Driving
  */
 public abstract class DriveCommand extends Command {
-	protected double distanceToDrive = 0.0;
-	protected double intialLeftPower = 0.0;
-	protected double intialRightPower = 0.0;
+	private double distanceToDrive = 0.0;
 
 	// Used to correct driving path. make the robot drive straight
 	private static final double INCREASE_CORRECTION = 1.05;
@@ -35,8 +32,7 @@ public abstract class DriveCommand extends Command {
 	private double averageDistance;
 	private double distanceRemaining;
 	private double distanceScale;
-	
-	
+
 	public DriveCommand() {
 		requires(OI.driveTrain);
 	}
@@ -47,7 +43,7 @@ public abstract class DriveCommand extends Command {
 		OI.driveTrain.reset();
 		rampScaleFactor = 0.0;
 		rampCounter = 0.0;
-}
+	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
@@ -57,75 +53,81 @@ public abstract class DriveCommand extends Command {
 	}
 
 	// Called repeatedly when this Command is scheduled to run
-	abstract protected  void execute(); 
+	abstract protected void execute();
 
 	// Make this return true when this Command no longer needs to run execute()
 	abstract protected boolean isFinished();
 
 	// Called once after isFinished returns true
 	abstract protected void end();
-	
+
 	protected void adjustDriveStraight() {
 		double ldist = OI.driveTrain.getLeftDistance();
 		double rdist = OI.driveTrain.getRightDistance();
 		double leftPower = OI.driveTrain.getLeftPower();
 		double rightPower = OI.driveTrain.getRightPower();
- 		//logger.log(format(ldist,rdist,leftPower,rightPower));
-			
-		double leftdiff  = ldist - prevLeftDistance;
+		// logger.log(format(ldist,rdist,leftPower,rightPower));
+
+		double leftdiff = ldist - prevLeftDistance;
 		prevLeftDistance = ldist;
 		double rightdiff = rdist - prevRightDistance;
 		prevRightDistance = rdist;
-		
+
 		double ldistChk = Math.abs(leftdiff);
 		double rdistChk = Math.abs(rightdiff);
 		// XXXXXXXX Do we need a dead band
-//		if (Math.abs(ldistChk - rdistChk) < deadBandRange) {
-//			return;
-//		}
-			
+		// if (Math.abs(ldistChk - rdistChk) < deadBandRange) {
+		// return;
+		// }
+
 		if (ldistChk > rdistChk) {
 			rightPower *= INCREASE_CORRECTION;
 			leftPower *= DECREASE_CORRECTION;
-		} else 
-   		if (ldistChk < rdistChk) {
+		} else if (ldistChk < rdistChk) {
 			leftPower *= INCREASE_CORRECTION;
 			rightPower *= DECREASE_CORRECTION;
-   		}  	
-		
+		}
+
 		OI.driveTrain.setLeftPower(leftPower);
 		OI.driveTrain.setRightPower(rightPower);
 	}
-	
+
 	// returns the scaling factor for a smooth ramp up to speed
 	protected double rampUpFactor() {
 		if (rampCounter <= RAMP_CTR_MAX) {
-			rampScaleFactor = rampCounter/RAMP_CTR_MAX;
+			rampScaleFactor = rampCounter / RAMP_CTR_MAX;
 			rampCounter += 1.0;
 		}
-		if (rampScaleFactor > 1.0) {rampScaleFactor=1.0;} // Limit ramp scale factor to be no larger than 1.0;
-		if (rampScaleFactor < 0.0) {rampScaleFactor=0.0;} // Limit ramp scale factor to be no lower than 0.0;
-		
+		if (rampScaleFactor > 1.0) {
+			rampScaleFactor = 1.0;
+		} // Limit ramp scale factor to be no larger than 1.0;
+		if (rampScaleFactor < 0.0) {
+			rampScaleFactor = 0.0;
+		} // Limit ramp scale factor to be no lower than 0.0;
+
 		return rampScaleFactor;
 	}
-	
-	// returns the scaling factor for a smooth ramp down, based on distance 
+
+	// returns the scaling factor for a smooth ramp down, based on distance
 	protected double rampDownFactor() {
 		// As the robot is getting closer to the desired distance, ramp
 		// the power to the drive train down.
 		// Average left and right side distances to get robot distance
-		averageDistance = (OI.driveTrain.getLeftDistance() + OI.driveTrain.getRightDistance())/2.0;
-		
+		averageDistance = (OI.driveTrain.getLeftDistance() + OI.driveTrain.getRightDistance()) / 2.0;
+
 		// How much distance is left to travel?
 		distanceRemaining = distanceToDrive - averageDistance;
-		
+
 		// As the remaining distance approaches the distanceToDrive ramp down the motor power
 		// starting to ramp when within the STOP_RAMP_DISTANCE.
-		distanceScale = distanceRemaining/STOP_RAMP_DISTANCE;
-		if (distanceScale > 1.0) {distanceScale=1.0;} // Limit distance scale factor to be no larger than 1.0;
-		if (distanceScale < 0.0) {distanceScale=0.0;} // Limit distance scale factor to be no lower than 0.0;
-		
+		distanceScale = distanceRemaining / STOP_RAMP_DISTANCE;
+		if (distanceScale > 1.0) {
+			distanceScale = 1.0;
+		} // Limit distance scale factor to be no larger than 1.0;
+		if (distanceScale < 0.0) {
+			distanceScale = 0.0;
+		} // Limit distance scale factor to be no lower than 0.0;
+
 		return distanceScale;
 	}
-	
 }
