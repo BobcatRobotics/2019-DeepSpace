@@ -26,6 +26,7 @@ public class Robot extends TimedRobot {
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
+  Command m_DriveWithJoysticks;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -37,6 +38,7 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new DriveWithJoysticks());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    m_DriveWithJoysticks = new DriveWithJoysticks();
   }
 
   /**
@@ -110,6 +112,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    m_DriveWithJoysticks.start();
   }
 
   /**

@@ -9,14 +9,12 @@ public class DriveTrain extends Subsystem {
 	/** Inverts drive direction **/
 	private static final double INVERT_MOTOR = -1.0;
 	
-	private PWMTalonSRX leftFront;
+	private PWMVictorSPX leftFront;
 	private PWMVictorSPX leftMiddle;
 	private PWMVictorSPX leftRear;
-	private PWMTalonSRX rightFront;
+	private PWMVictorSPX rightFront;
 	private PWMVictorSPX rightMiddle;
 	private PWMVictorSPX rightRear;
-	private GrayHill leftEncoder;
-	private GrayHill rightEncoder;
 	private boolean invertLeft = true;
 	private double leftPower = 0.0;
 	private double rightPower = 0.0;
@@ -26,20 +24,19 @@ public class DriveTrain extends Subsystem {
 		setRightMotors(RobotMap.driveRightMotorFront, RobotMap.driveRightMotorMiddle,RobotMap.driveRightMotorRear);
 		setLeftMotors(RobotMap.driveLeftMotorFront, RobotMap.driveLeftMotorMiddle, RobotMap.driveLeftMotorRear);
 		setLeftMotorsReverse(false);
-		setLeftEncoder(RobotMap.leftEncoderChannel1, RobotMap.leftEncoderChannel2);
-		setRightEncoder(RobotMap.rightEncoderChannel1, RobotMap.rightEncoderChannel2);
+		
 	}
 	
 	
 	// Put methods for controlling this subsystem here. Call these from Commands.
 	public void setLeftMotors(int lf,int lm,int lr) {
-		leftFront = new PWMTalonSRX(lf);
+		leftFront = new PWMVictorSPX(lf);
 		leftMiddle = new PWMVictorSPX(lm);
 		leftRear = new PWMVictorSPX(lr);
 	}
 	
 	public void setRightMotors(int rf,int rm,int rr) {
-		rightFront = new PWMTalonSRX(rf);
+		rightFront = new PWMVictorSPX(rf);
 		rightMiddle = new PWMVictorSPX(rm);
 		rightRear = new PWMVictorSPX(rr);
 	}
@@ -48,29 +45,7 @@ public class DriveTrain extends Subsystem {
 		invertLeft = invert;
 	}
 	
-	public void setLeftEncoder(int leftEncCh1, int leftEncCh2) {
-		leftEncoder = new GrayHill(leftEncCh1, leftEncCh2, false);
-	}
-
-	public double getLeftDistance() {
-		return leftEncoder.getDistance();
-	}
-
-	public double getLeftRate() {
-		return leftEncoder.getRate();
-	}
 	
-	public void setRightEncoder(int rightEncCh1, int rightEncCh2) {
-		rightEncoder = new GrayHill(rightEncCh1, rightEncCh2, false);
-	}
-
-	public double getRightDistance() {
-		return rightEncoder.getDistance();
-	}
-
-	public double getRightRate() {
-		return rightEncoder.getRate();
-	}
 
 	public double getLeftPower() {
 		return leftPower;
@@ -81,8 +56,8 @@ public class DriveTrain extends Subsystem {
 			leftPwr = 1.0;
 		else
 		if (leftPwr < -1.0)
-			leftPwr = 1.0;
-		
+			leftPwr = -1.0;
+			//was leftPwr = 1.0, we thought it should be -1.0
 		this.leftPower = leftPwr;
 	}
 
@@ -95,7 +70,8 @@ public class DriveTrain extends Subsystem {
 			rightPwr = 1.0;
 		else
 		if (rightPwr < -1.0)
-			rightPwr = 1.0;
+			rightPwr = -1.0;
+			//was rightPwr = 1.0, we thought it should be -1.0
 		this.rightPower = rightPwr;
 	}
 
@@ -104,7 +80,7 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void drive(double leftPwr, double rightPwr) {
-		if (invertLeft )
+		if (invertLeft)
 			leftPwr *= INVERT_MOTOR;
 		else
 			rightPwr *= INVERT_MOTOR;
@@ -131,8 +107,7 @@ public class DriveTrain extends Subsystem {
 	public void reset() {
 		leftPower = 0.0;
 		rightPower = 0.0;
-		leftEncoder.reset();
-		rightEncoder.reset();
+		
 	}
 
 	@Override
