@@ -26,4 +26,11 @@ public class RobotMap {
 	public static int rightJoystick = 1;
 	public static int gamePad = 2;
 
+	//Elev motors
+	public static int elevMotor1 = 0;
+	public static int elevMotor2 = 1;	
+	
+	//Elev limit Switches
+	public static int elevLSwitchT = 0;
+	public static int elevLSwitchB = 1;
 }
