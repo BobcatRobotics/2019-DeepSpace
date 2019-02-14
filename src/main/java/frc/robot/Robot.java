@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveWithJoysticks;
+import frc.robot.commands.RunWrist;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,11 +23,11 @@ import frc.robot.commands.DriveWithJoysticks;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static OI m_oi;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
   Command m_DriveWithJoysticks;
+  Command m_RunWrist;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -34,11 +35,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new DriveWithJoysticks());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
     m_DriveWithJoysticks = new DriveWithJoysticks();
+    m_runwrist = new RunWrist();
   }
 
   /**

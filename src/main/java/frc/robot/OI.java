@@ -8,6 +8,7 @@ import frc.robot.lib.RioLogger;
 import frc.robot.lib.RioLoggerThread;
 import frc.robot.lib.SmartDashLog;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Wrist;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -20,6 +21,9 @@ public class OI {
 
   // Drive Chain Subsystem
   public static DriveTrain driveTrain = new DriveTrain();
+  
+  //Wrist Subsystem
+  public static Wrist wrist = new Wrist();
 
   // Joysticks
   public static Joystick rightStick = new Joystick(RobotMap.rightJoystick);

@@ -26,4 +26,9 @@ public class RobotMap {
 	public static int rightJoystick = 1;
 	public static int gamePad = 2;
 
+	//Wrist
+	/*Update this to match wiring*/
+	public static int wristSolenoid1 = 1;
+	public static int wristSolenoid2 = 2;
+
 }
