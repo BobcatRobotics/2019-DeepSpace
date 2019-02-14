@@ -33,4 +33,9 @@ public class RobotMap {
 	//Elev limit Switches
 	public static int elevLSwitchT = 0;
 	public static int elevLSwitchB = 1;
+	//Wrist
+	/*Update this to match wiring*/
+	public static int wristSolenoid1 = 1;
+	public static int wristSolenoid2 = 2;
+
 }
