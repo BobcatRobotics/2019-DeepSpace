@@ -39,7 +39,7 @@ public class Robot extends TimedRobot {
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
     m_DriveWithJoysticks = new DriveWithJoysticks();
-    m_runwrist = new RunWrist();
+    m_RunWrist = new RunWrist();
   }
 
   /**

@@ -27,15 +27,24 @@ public class RobotMap {
 	public static int gamePad = 2;
 
 	//Elev motors
+	/*Update this to match wiring*/
 	public static int elevMotor1 = 0;
 	public static int elevMotor2 = 1;	
+	public static int elevMotor3 = 2;
 	
 	//Elev limit Switches
+	/*Update this to match wiring*/
 	public static int elevLSwitchT = 0;
 	public static int elevLSwitchB = 1;
 	//Wrist
 	/*Update this to match wiring*/
 	public static int wristSolenoid1 = 1;
 	public static int wristSolenoid2 = 2;
+
+	//Panel Intake
+	public static int panelSolenoid = 0;
+
+	//Cargo Roller
+	public static int cargoMotor = 0;
 
 }
