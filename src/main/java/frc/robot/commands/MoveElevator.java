@@ -1,13 +1,10 @@
 package frc.robot.commands;
 
 import frc.robot.OI;
-import frc.robot.RobotMap;
-
-
-import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.subsystems.ElevatorState;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class MoveElevator extends Command {
+public abstract class MoveElevator extends Command {
 
     protected double elev = 0.0;
 
@@ -20,10 +17,35 @@ public class MoveElevator extends Command {
 
         OI.elev1.reset();
     }
+
+    protected ElevatorState checkSwitches() {
+
+        if (OI.elev1.upperLimit()) {
+            
+            return ElevatorState.LIMIT_UP;
+        } else if (OI.elev1.lowerLimit()) {
+            
+            return ElevatorState.LIMIT_DOWN;
+        } else {
+
+            return ElevatorState.NONE;
+        }
+    }
+
+    protected abstract void execute();
     
-    @Override
     protected boolean isFinished() {
 
         return false;
+    }
+
+    protected void end() {
+
+        OI.elev1.stop();
+    }
+
+    protected void interruppted() {
+
+        OI.elev1.stop();
     }
 }
