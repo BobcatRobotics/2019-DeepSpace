@@ -8,7 +8,7 @@ package frc.robot;
  */
 public class RobotMap {
   // Drive  Train
-	public static int driveRightMotorFront = 2;
+	public static int driveRightMotorFront = 60;
 	public static int driveRightMotorMiddle = 23;
 	public static int driveRightMotorRear = 24;
 	public static int driveLeftMotorFront = 1;
