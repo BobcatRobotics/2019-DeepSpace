@@ -1,4 +1,4 @@
-/* package frc.robot.subsystems;
+package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import frc.robot.RobotMap;
@@ -26,4 +26,4 @@ public class PanelIntake {
     public void reset() {
         setOut();
     }
-} */
+}

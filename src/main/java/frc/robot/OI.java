@@ -10,8 +10,8 @@ import frc.robot.lib.RioLoggerThread;
 import frc.robot.lib.SmartDashLog;
 import frc.robot.subsystems.CargoRoller;
 import frc.robot.subsystems.DriveTrain;
-//import frc.robot.subsystems.Elevator;
-//import frc.robot.subsystems.PanelIntake;
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.PanelIntake;
 import frc.robot.subsystems.Wrist;
 import frc.robot.commands.*;
 
@@ -40,11 +40,11 @@ public class OI {
   public static Solenoid shifter = new Solenoid(RobotMap.shiftSolenoid);
 
   //Elevator
-  //public static Elevator elev1 = new Elevator();
+  public static Elevator elev1 = new Elevator();
   public static boolean limitOn = true;
 
   //Panel Intake
-  //public static PanelIntake panel = new PanelIntake();
+  public static PanelIntake panel = new PanelIntake();
 
   //Cargo Roller
   public static CargoRoller cargo = new CargoRoller();

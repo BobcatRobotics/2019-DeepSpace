@@ -1,4 +1,4 @@
-/* package frc.robot.subsystems;
+package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -87,10 +87,20 @@ public class Elevator {
         return bLimit.get();
     }
 
+    public int checkSwitches() {
+
+        if (upperLimit()) {
+            return 1;
+        } else if (lowerLimit()) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
     public void displayDashboard() {
 
         SmartDashboard.putBoolean("Current Upper Value", tLimit.get());
         SmartDashboard.putBoolean("Current Lower Value", bLimit.get());
     }
 }
- */
