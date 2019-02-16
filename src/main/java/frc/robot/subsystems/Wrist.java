@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
 import frc.robot.RobotMap;
 
 public class Wrist {
-    public static Solenoid solenoid1 = new Solenoid(RobotMap.wristSolenoid1); /* Controls the wrist */
-    public static Solenoid solenoid2 = new Solenoid(RobotMap.wristSolenoid2); /* Controls the wrist */
+    public static Solenoid solenoid1 = new Solenoid(RobotMap.wristSolenoid1); 
+    public static Solenoid solenoid2 = new Solenoid(RobotMap.wristSolenoid2); 
 
     public void setBothSolenoids(boolean on) {
         solenoid1.set(on);

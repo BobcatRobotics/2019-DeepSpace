@@ -8,12 +8,12 @@ package frc.robot;
  */
 public class RobotMap {
   // Drive  Train
-	public static int driveRightMotorFront = 60;
-	public static int driveRightMotorMiddle = 23;
-	public static int driveRightMotorRear = 24;
-	public static int driveLeftMotorFront = 1;
-	public static int driveLeftMotorMiddle = 21;
-	public static int driveLeftMotorRear = 22;
+	public static int driveRightMotorFront = 0;
+	public static int driveRightMotorMiddle = 1;
+	public static int driveRightMotorRear = 2;
+	public static int driveLeftMotorFront = 3;
+	public static int driveLeftMotorMiddle = 4;
+	public static int driveLeftMotorRear = 5;
 	
 	// Drive Train Encoders
 	public static int leftEncoderChannel1 = 2;
@@ -25,6 +25,10 @@ public class RobotMap {
 	public static int leftJoystick = 0;
 	public static int rightJoystick = 1;
 	public static int gamePad = 2;
+	public static int stickShift = 3;
+	
+	//Shifter
+	public static int shiftSolenoid = 0;
 
 	//Elev motors
 	/*Update this to match wiring*/
@@ -40,9 +44,10 @@ public class RobotMap {
 	/*Update this to match wiring*/
 	public static int wristSolenoid1 = 1;
 	public static int wristSolenoid2 = 2;
+	
 
 	//Panel Intake
-	public static int panelSolenoid = 0;
+	public static int panelSolenoid = 3;
 
 	//Cargo Roller
 	public static int cargoMotor = 0;

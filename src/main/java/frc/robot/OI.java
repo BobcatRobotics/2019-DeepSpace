@@ -2,16 +2,18 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 // import edu.wpi.first.wpilibj.buttons.Button;
-// import edu.wpi.first.wpilibj.buttons.JoystickButton;
-// import edu.wpi.first.wpilibj.buttons.Trigger;
+ import edu.wpi.first.wpilibj.buttons.JoystickButton;
+ import edu.wpi.first.wpilibj.buttons.Trigger;
+ import edu.wpi.first.wpilibj.Solenoid;
 import frc.robot.lib.RioLogger;
 import frc.robot.lib.RioLoggerThread;
 import frc.robot.lib.SmartDashLog;
 import frc.robot.subsystems.CargoRoller;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.PanelIntake;
+//import frc.robot.subsystems.Elevator;
+//import frc.robot.subsystems.PanelIntake;
 import frc.robot.subsystems.Wrist;
+import frc.robot.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -24,6 +26,7 @@ public class OI {
 
   // Drive Chain Subsystem
   public static DriveTrain driveTrain = new DriveTrain();
+
   
   //Wrist Subsystem
   public static Wrist wrist = new Wrist();
@@ -33,12 +36,15 @@ public class OI {
   public static Joystick leftStick = new Joystick(RobotMap.leftJoystick);
   public static Joystick gamePad = new Joystick(RobotMap.gamePad);
 
+  //Solenoids
+  public static Solenoid shifter = new Solenoid(RobotMap.shiftSolenoid);
+
   //Elevator
-  public static Elevator elev1 = new Elevator();
+  //public static Elevator elev1 = new Elevator();
   public static boolean limitOn = true;
 
   //Panel Intake
-  public static PanelIntake panel = new PanelIntake();
+  //public static PanelIntake panel = new PanelIntake();
 
   //Cargo Roller
   public static CargoRoller cargo = new CargoRoller();
@@ -47,12 +53,15 @@ public class OI {
   //public static Button btnCubePickup = new JoystickButton(gamePad, RobotMap.gamePadCubePickup);
 
   // Triggers
-  //public static Trigger trigShifter = new JoystickButton(rightStick, RobotMap.rightJoystickShifter);
+  public static Trigger trigShifter = new JoystickButton(rightStick, RobotMap.stickShift);
 
   static {
    
     // Start Logging Thread
     logFile = RioLoggerThread.getInstance();
     RioLogger.log("OI static block finished.");
+
+    trigShifter.whenActive(new ShiftHigh());
+		trigShifter.whenInactive(new ShiftLow());
   }
 }

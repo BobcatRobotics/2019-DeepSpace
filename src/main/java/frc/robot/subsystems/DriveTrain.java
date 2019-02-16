@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.PWMTalonSRX;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
@@ -9,12 +8,12 @@ public class DriveTrain extends Subsystem {
 	/** Inverts drive direction **/
 	private static final double INVERT_MOTOR = -1.0;
 	
-	private PWMVictorSPX leftFront;
-	private PWMVictorSPX leftMiddle;
-	private PWMVictorSPX leftRear;
-	private PWMVictorSPX rightFront;
-	private PWMVictorSPX rightMiddle;
-	private PWMVictorSPX rightRear;
+	private WPI_VictorSPX leftFront;
+	private WPI_VictorSPX leftMiddle;
+	private WPI_VictorSPX leftRear;
+	private WPI_VictorSPX rightFront;
+	private WPI_VictorSPX rightMiddle;
+	private WPI_VictorSPX rightRear;
 	private boolean invertLeft = true;
 	private double leftPower = 0.0;
 	private double rightPower = 0.0;
@@ -30,15 +29,15 @@ public class DriveTrain extends Subsystem {
 	
 	// Put methods for controlling this subsystem here. Call these from Commands.
 	public void setLeftMotors(int lf,int lm,int lr) {
-		leftFront = new PWMVictorSPX(lf);
-		leftMiddle = new PWMVictorSPX(lm);
-		leftRear = new PWMVictorSPX(lr);
+		leftFront = new WPI_VictorSPX(lf);
+		leftMiddle = new WPI_VictorSPX(lm);
+		leftRear = new WPI_VictorSPX(lr);
 	}
 	
 	public void setRightMotors(int rf,int rm,int rr) {
-		rightFront = new PWMVictorSPX(rf);
-		rightMiddle = new PWMVictorSPX(rm);
-		rightRear = new PWMVictorSPX(rr);
+		rightFront = new WPI_VictorSPX(rf);
+		rightMiddle = new WPI_VictorSPX(rm);
+		rightRear = new WPI_VictorSPX(rr);
 	}
 
 	public void setLeftMotorsReverse(boolean invert) {

@@ -1,12 +1,18 @@
-package frc.robot.subsystems;
+/* package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import frc.robot.RobotMap;
 
 public class PanelIntake {
 
-    public static Solenoid solenoid1 = new Solenoid(RobotMap.panelSolenoid);
+    //public static Solenoid solenoid1 = new Solenoid(RobotMap.panelSolenoid);
+    private Solenoid solenoid1;
 
+    public PanelIntake() {
+        
+        solenoid1 = new Solenoid(RobotMap.panelSolenoid);
+    }
+    
     public void setIn() {
 
         solenoid1.set(true);
@@ -20,4 +26,4 @@ public class PanelIntake {
     public void reset() {
         setOut();
     }
-}
+} */
