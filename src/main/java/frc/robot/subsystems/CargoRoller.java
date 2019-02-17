@@ -17,16 +17,23 @@ public class CargoRoller {
 
     public void deposit() {
 
-        cargoMotor.set(.5);
+        cargoMotor.set(-.5);
 
-        cargoSpeed = .5;
+        cargoSpeed = -.5;
     }
 
     public void intake() {
 
-        cargoMotor.set(-1.0);
+        cargoMotor.set(1.0);
 
-        cargoSpeed = -1.0;
+        cargoSpeed = 1.0;
+    }
+
+    public void stop() {
+
+        cargoMotor.set(0.0);
+        
+        cargoSpeed = 0.0;
     }
 
     public double getMotorSpeed() {

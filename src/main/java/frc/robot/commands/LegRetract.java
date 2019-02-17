@@ -19,6 +19,6 @@ public class LegRetract extends Command {
     @Override
     protected boolean isFinished() {
 
-        return false;
+        return true;
     }
 }

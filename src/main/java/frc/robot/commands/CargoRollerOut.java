@@ -21,4 +21,16 @@ public class CargoRollerOut extends Command {
 
         return false;
     }
+
+    @Override
+    protected void interrupted() {
+        
+        OI.cargo.stop();
+    }
+
+    @Override
+    protected void end() {
+
+        OI.cargo.stop();
+    }
 }

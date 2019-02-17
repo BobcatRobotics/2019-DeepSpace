@@ -10,21 +10,29 @@ public class WristDeliever extends Command {
 		super();
     }
     
-    
+    @Override
+    protected void initialize() {
+        OI.wrist.deliver();
+    }
+
     @Override
     protected void execute () {
         
-        OI.wrist.setDifferentSolenoids(true);
+        
     }
 
     @Override
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 
 	@Override
 	protected void end() {
-		OI.wrist.reset();
+        OI.wrist.deliver();;
 	}
     
+    @Override
+	protected void interrupted() {
+        OI.wrist.deliver();;
+	}
 }

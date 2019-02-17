@@ -82,8 +82,8 @@ public class OI {
     btnWristDep.whenPressed(new WristDeployed());
     btnWristDel.whenPressed(new WristDeliever());
     btnLock.whenPressed(new LockEnable());
-    btnLock.whenPressed(new LegDeploy());
+    //btnLock.whenPressed(new LegDeploy());
     btnUnlock.whenPressed(new LockDisable());
-    btnUnlock.whenPressed(new LegRetract());
+    //btnUnlock.whenPressed(new LegRetract());
   }
 }
