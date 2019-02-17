@@ -2,9 +2,6 @@ package frc.robot.subsystems;
 
 
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.buttons.Trigger;
 import frc.robot.RobotMap;
 
 public class Wrist {

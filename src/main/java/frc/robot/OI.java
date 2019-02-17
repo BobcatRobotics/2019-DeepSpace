@@ -8,11 +8,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import frc.robot.lib.RioLogger;
 import frc.robot.lib.RioLoggerThread;
 import frc.robot.lib.SmartDashLog;
-import frc.robot.subsystems.CargoRoller;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.PanelIntake;
-import frc.robot.subsystems.Wrist;
+import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 
 /**
@@ -49,14 +45,23 @@ public class OI {
   //Cargo Roller
   public static CargoRoller cargo = new CargoRoller();
 
+  //Peg leg
+  public static PegLeg pegleg = new PegLeg();
+
+  //Lock
+  public static Lock lock = new Lock();
+
+
   // Buttons
   public static Button btnRollerIn = new JoystickButton(gamePad, RobotMap.cargoInB);
   public static Button btnRollerOut = new JoystickButton(gamePad, RobotMap.cargoOutB);
   public static Button btnPanelIn = new JoystickButton(gamePad, RobotMap.panelInB);
   public static Button btnPanelOut = new JoystickButton(gamePad, RobotMap.panelOutB);
-  public static Button btnWristStow = new JoystickButton(gamePad, RobotMap.wristStow);
-  public static Button btnWristDep = new JoystickButton(gamePad, RobotMap.wristDep);
-  public static Button btnWristDel = new JoystickButton(gamePad, RobotMap.wristDel);
+  public static Button btnWristStow = new JoystickButton(gamePad, RobotMap.wristStowB);
+  public static Button btnWristDep = new JoystickButton(gamePad, RobotMap.wristDepB);
+  public static Button btnWristDel = new JoystickButton(gamePad, RobotMap.wristDelB);
+  public static Button btnLock = new JoystickButton(gamePad, RobotMap.lockB);
+  public static Button btnUnlock = new JoystickButton(gamePad, RobotMap.unlockB);
 
   // Triggers
   public static Trigger trigShifter = new JoystickButton(rightStick, RobotMap.stickShift);
@@ -76,5 +81,9 @@ public class OI {
     btnWristStow.whenPressed(new WristStowed());
     btnWristDep.whenPressed(new WristDeployed());
     btnWristDel.whenPressed(new WristDeliever());
+    btnLock.whenPressed(new LockEnable());
+    btnLock.whenPressed(new LegDeploy());
+    btnUnlock.whenPressed(new LockDisable());
+    btnUnlock.whenPressed(new LegRetract());
   }
 }

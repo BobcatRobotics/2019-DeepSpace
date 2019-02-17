@@ -1,5 +1,6 @@
 package frc.robot;
 
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -42,12 +43,17 @@ public class RobotMap {
 	public static int elevLSwitchB = 1;
 	//Wrist
 	/*Update this to match wiring*/
-	public static int wristSolenoid1 = 1;
-	public static int wristSolenoid2 = 2;
+	public static int wristSolenoid1 = 5;
+	public static int wristSolenoid2 = 6;
 	
+	//Lock
+	public static int wristLock = 4;
+
+	//Peg Leg
+	public static int pegLeg = 1;
 
 	//Panel Intake
-	public static int panelSolenoid = 3;
+	public static int panelSolenoid = 7;
 
 	//Cargo Roller
 	public static int cargoMotor = 6;
@@ -57,7 +63,9 @@ public class RobotMap {
 	public static int cargoOutB = 8;
 	public static int panelInB = 5;
 	public static int panelOutB = 7;
-	public static int wristStow = 2;
-	public static int wristDep = 4;
-	public static int wristDel = 3;
+	public static int wristStowB = 2;
+	public static int wristDepB = 4;
+	public static int wristDelB = 3;
+	public static int lockB = 1;
+	public static int unlockB = 12;
 }
