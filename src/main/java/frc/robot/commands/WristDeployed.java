@@ -3,10 +3,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 
-public class RunWrist extends Command {
+public class WristDeployed extends Command {
     boolean toggle = false;
 
-    public RunWrist() {
+    public WristDeployed() {
 		super();
     }
     
@@ -15,15 +15,7 @@ public class RunWrist extends Command {
     protected void execute () {
         //TODO update these once the wrist is more defined
         //Possibly extend to individual commands
-        if(OI.gamePad.getRawButtonPressed(2)){
-            OI.wrist.setBothSolenoids(true);
-        }
-        if(OI.gamePad.getRawButtonPressed(3)){
-            OI.wrist.setDifferentSolenoids(true);
-        }
-        if(OI.gamePad.getRawButtonPressed(4)){
-            OI.wrist.setBothSolenoids(false);
-        }
+        OI.wrist.setBothSolenoids(true);
     }
 
     @Override

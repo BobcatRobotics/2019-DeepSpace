@@ -1,10 +1,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-// import edu.wpi.first.wpilibj.buttons.Button;
- import edu.wpi.first.wpilibj.buttons.JoystickButton;
- import edu.wpi.first.wpilibj.buttons.Trigger;
- import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
+import edu.wpi.first.wpilibj.Solenoid;
 import frc.robot.lib.RioLogger;
 import frc.robot.lib.RioLoggerThread;
 import frc.robot.lib.SmartDashLog;
@@ -50,7 +50,13 @@ public class OI {
   public static CargoRoller cargo = new CargoRoller();
 
   // Buttons
-  //public static Button btnCubePickup = new JoystickButton(gamePad, RobotMap.gamePadCubePickup);
+  public static Button btnRollerIn = new JoystickButton(gamePad, RobotMap.cargoInB);
+  public static Button btnRollerOut = new JoystickButton(gamePad, RobotMap.cargoOutB);
+  public static Button btnPanelIn = new JoystickButton(gamePad, RobotMap.panelInB);
+  public static Button btnPanelOut = new JoystickButton(gamePad, RobotMap.panelOutB);
+  public static Button btnWristStow = new JoystickButton(gamePad, RobotMap.wristStow);
+  public static Button btnWristDep = new JoystickButton(gamePad, RobotMap.wristDep);
+  public static Button btnWristDel = new JoystickButton(gamePad, RobotMap.wristDel);
 
   // Triggers
   public static Trigger trigShifter = new JoystickButton(rightStick, RobotMap.stickShift);
@@ -62,6 +68,13 @@ public class OI {
     RioLogger.log("OI static block finished.");
 
     trigShifter.whenActive(new ShiftHigh());
-		trigShifter.whenInactive(new ShiftLow());
+    trigShifter.whenInactive(new ShiftLow());
+    btnRollerIn.whileHeld(new CargoRollerIn());
+    btnRollerOut.whileHeld(new CargoRollerOut());
+    btnPanelIn.whenPressed(new PanelIntakeIn());
+    btnPanelOut.whenPressed(new PanelIntakeOut());
+    btnWristStow.whenPressed(new WristStowed());
+    btnWristDep.whenPressed(new WristDeployed());
+    btnWristDel.whenPressed(new WristDeliever());
   }
 }

@@ -3,25 +3,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 
-public class MovePanelIntake extends Command {
+public class CargoRollerOut extends Command {
 
-    public MovePanelIntake() {
-        
+    public CargoRollerOut() {
+
         super();
     }
 
     @Override
     protected void execute() {
 
-        if (OI.gamePad.getRawButton(5)) {
-
-            OI.panel.setIn();
-        }
-
-        if (OI.gamePad.getRawButton(8)) {
-
-            OI.panel.setOut();
-        }
+        OI.cargo.deposit();
     }
 
     @Override
@@ -29,5 +21,4 @@ public class MovePanelIntake extends Command {
 
         return false;
     }
-
 }

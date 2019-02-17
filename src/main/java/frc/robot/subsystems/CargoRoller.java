@@ -1,17 +1,18 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import frc.robot.RobotMap;
 
 public class CargoRoller {
 
-    private WPI_TalonSRX cargoMotor;
+    private WPI_VictorSPX cargoMotor;
 
     private double cargoSpeed = 0.0;
 
     public CargoRoller() {
 
-        cargoMotor = new WPI_TalonSRX(RobotMap.cargoMotor);
+        cargoMotor = new WPI_VictorSPX(RobotMap.cargoMotor);
     }
 
     public void deposit() {

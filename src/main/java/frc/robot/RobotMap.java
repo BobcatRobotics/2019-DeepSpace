@@ -50,6 +50,14 @@ public class RobotMap {
 	public static int panelSolenoid = 3;
 
 	//Cargo Roller
-	public static int cargoMotor = 0;
+	public static int cargoMotor = 6;
 
+	//Buttons
+	public static int cargoInB = 6;
+	public static int cargoOutB = 8;
+	public static int panelInB = 5;
+	public static int panelOutB = 7;
+	public static int wristStow = 2;
+	public static int wristDep = 4;
+	public static int wristDel = 3;
 }
