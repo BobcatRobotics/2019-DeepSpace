@@ -63,8 +63,8 @@ public class RobotMap {
 	public static int cargoOutB = 8;
 	public static int panelInB = 5;
 	public static int panelOutB = 7;
-	public static int wristStowB = 2;
-	public static int wristDepB = 4;
+	public static int wristStowB = 4;
+	public static int wristDepB = 2;
 	public static int wristDelB = 3;
 	public static int lockB = 1;
 	public static int unlockB = 12;

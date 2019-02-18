@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.RobotMap;
@@ -23,6 +25,12 @@ public class Elevator {
         elevatorMotor1 = new WPI_TalonSRX(RobotMap.elevMotor1);
         elevatorMotor2 = new WPI_TalonSRX(RobotMap.elevMotor2);
         elevatorMotor3 = new WPI_TalonSRX(RobotMap.elevMotor3);
+
+        elevatorMotor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute,0,0);
+        elevatorMotor2.follow(elevatorMotor1);
+        elevatorMotor3.follow(elevatorMotor1);
+        elevatorMotor1.setSelectedSensorPosition(0,0,0);
+        
 
         tLimit = new DigitalInput(RobotMap.elevLSwitchT);
         bLimit = new DigitalInput(RobotMap.elevLSwitchB);
@@ -51,8 +59,6 @@ public class Elevator {
     public void elevate(double speed) {
 
         elevatorMotor1.set(speed);
-        elevatorMotor2.set(speed);
-        elevatorMotor3.set(speed);
 
         elevatorSpeed = speed;
     }
