@@ -36,6 +36,9 @@ public class RobotMap {
 	public static int elevMotor1 = 10;
 	public static int elevMotor2 = 11;	
 	public static int elevMotor3 = 12;
+	public static int gamePadLeftPwrStick = 1;
+	public static int gamePadRightPwrStick = 3; 
+
 	
 	//Elev limit Switches
 	/*Update this to match wiring*/
