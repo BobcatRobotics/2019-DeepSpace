@@ -8,14 +8,25 @@ public class Wrist {
     public static Solenoid solenoid1 = new Solenoid(RobotMap.wristSolenoid1); 
     public static Solenoid solenoid2 = new Solenoid(RobotMap.wristSolenoid2); 
 
-    public void setBothSolenoids(boolean on) {
-        solenoid1.set(on);
-        solenoid2.set(on);
+
+    public void deploy() {
+        
+        solenoid1.set(true);
+        solenoid2.set(false);
     }
-    public void setDifferentSolenoids(boolean on) {
-        solenoid1.set(on);
-        solenoid2.set(!on);
+
+    public void deliver() {
+
+        solenoid1.set(false);
+        solenoid2.set(true);
     }
+
+    public void stow() {
+
+        solenoid1.set(false);
+        solenoid2.set(false);
+    }
+
     public void reset() {
         solenoid1.set(false);
         solenoid2.set(false);

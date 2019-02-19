@@ -18,7 +18,19 @@ public class CargoRollerIn extends Command {
 
     @Override
     protected boolean isFinished() {
-
+        
         return false;
+    }
+
+    @Override
+    protected void interrupted() {
+        
+        OI.cargo.stop();
+    }
+
+    @Override
+    protected void end() {
+
+        OI.cargo.stop();
     }
 }

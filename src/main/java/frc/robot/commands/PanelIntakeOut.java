@@ -19,7 +19,7 @@ public class PanelIntakeOut extends Command {
     @Override
     protected boolean isFinished() {
 
-        return false;
+        return true;
     }
 
 }

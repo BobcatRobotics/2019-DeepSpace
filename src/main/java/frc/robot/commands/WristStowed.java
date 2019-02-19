@@ -10,22 +10,32 @@ public class WristStowed extends Command {
 		super();
     }
     
+    @Override
+    protected void initialize() {
+
+        OI.wrist.stow();
+    }
     
     @Override
     protected void execute () {
         //TODO update these once the wrist is more defined
         //Possibly extend to individual commands
-        OI.wrist.setBothSolenoids(false);
+        OI.wrist.stow();
     }
 
     @Override
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 
 	@Override
 	protected void end() {
-		OI.wrist.reset();
-	}
+        OI.wrist.stow();
+    }
+    
+    @Override
+    protected void interrupted() {
+        OI.wrist.stow();
+    }
     
 }

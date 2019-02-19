@@ -44,17 +44,21 @@ public class RobotMap {
 	//Wrist
 	/*Update this to match wiring*/
 	public static int wristSolenoid1 = 5;
-	public static int wristSolenoid2 = 6;
+	public static int wristSolenoid2 = 7;
 	
 	//Lock
+<<<<<<< HEAD
 	public static int wristLockSol = 4;
+=======
+	public static int wristLock = 3;
+>>>>>>> 08831865c458182a788e0576b52875d1fac1b04c
 
 	//Peg Leg
 	public static int pegLegSol = 1;
 	public static int pegLegMotor = 7;
 
 	//Panel Intake
-	public static int panelSolenoid = 7;
+	public static int panelSolenoid = 6;
 
 	//Cargo Roller
 	public static int cargoMotor = 6;
@@ -64,8 +68,8 @@ public class RobotMap {
 	public static int cargoOutB = 8;
 	public static int panelInB = 5;
 	public static int panelOutB = 7;
-	public static int wristStowB = 2;
-	public static int wristDepB = 4;
+	public static int wristStowB = 4;
+	public static int wristDepB = 2;
 	public static int wristDelB = 3;
 	public static int lockB = 1;
 	public static int unlockB = 12;
