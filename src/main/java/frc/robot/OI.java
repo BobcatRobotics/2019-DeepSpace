@@ -37,7 +37,7 @@ public class OI {
 
   //Elevator
   public static Elevator elev1 = new Elevator();
-  public static boolean limitOn = true;
+  public static boolean limitOn = false;
 
   //Panel Intake
   public static PanelIntake panel = new PanelIntake();
@@ -61,7 +61,7 @@ public class OI {
   public static Button btnWristDep = new JoystickButton(gamePad, RobotMap.wristDepB);
   public static Button btnWristDel = new JoystickButton(gamePad, RobotMap.wristDelB);
   public static Button btnLock = new JoystickButton(gamePad, RobotMap.lockB);
-  public static Button btnUnlock = new JoystickButton(gamePad, RobotMap.unlockB);
+  //public static Button btnUnlock = new JoystickButton(gamePad, RobotMap.unlockB);
 
   // Triggers
   public static Trigger trigShifter = new JoystickButton(rightStick, RobotMap.stickShift);
@@ -83,7 +83,7 @@ public class OI {
     btnWristDel.whenPressed(new WristDeliever());
     btnLock.whenPressed(new LockEnable());
     btnLock.whenPressed(new LegDeploy());
-    btnUnlock.whenPressed(new LockDisable());
-    btnUnlock.whenPressed(new LegRetract());
+    //btnUnlock.whenPressed(new LockDisable());
+    //btnUnlock.whenPressed(new LegRetract());
   }
 }

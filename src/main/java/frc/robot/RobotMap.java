@@ -33,9 +33,9 @@ public class RobotMap {
 
 	//Elev motors
 	/*Update this to match wiring*/
-	public static int elevMotor1 = 0;
-	public static int elevMotor2 = 1;	
-	public static int elevMotor3 = 2;
+	public static int elevMotor1 = 10;
+	public static int elevMotor2 = 11;	
+	public static int elevMotor3 = 12;
 	
 	//Elev limit Switches
 	/*Update this to match wiring*/
@@ -47,10 +47,11 @@ public class RobotMap {
 	public static int wristSolenoid2 = 6;
 	
 	//Lock
-	public static int wristLock = 4;
+	public static int wristLockSol = 4;
 
 	//Peg Leg
-	public static int pegLeg = 1;
+	public static int pegLegSol = 1;
+	public static int pegLegMotor = 7;
 
 	//Panel Intake
 	public static int panelSolenoid = 7;

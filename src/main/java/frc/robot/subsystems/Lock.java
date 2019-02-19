@@ -10,7 +10,7 @@ public class Lock {
 
     public Lock() {
         
-        solenoid1 = new Solenoid(RobotMap.lockB);
+        solenoid1 = new Solenoid(RobotMap.wristLockSol);
     }
     
     public void enable() {

@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveWithJoysticks;
+import frc.robot.commands.MoveElevator;
 //import frc.robot.commands.RunWrist;
 
 /**
@@ -27,6 +28,7 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
   Command m_DriveWithJoysticks;
+  Command m_MoveElevator;
   Command m_RunWrist;
   OI oi;
 
@@ -40,6 +42,7 @@ public class Robot extends TimedRobot {
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
     m_DriveWithJoysticks = new DriveWithJoysticks();
+    m_MoveElevator = new MoveElevator();
     //m_RunWrist = new RunWrist();
     oi = new OI();
   }
@@ -95,6 +98,8 @@ public class Robot extends TimedRobot {
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
+      m_DriveWithJoysticks.start();
+      m_MoveElevator.start();
     }
   }
 
@@ -116,6 +121,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     m_DriveWithJoysticks.start();
+    m_MoveElevator.start();
   }
 
   /**

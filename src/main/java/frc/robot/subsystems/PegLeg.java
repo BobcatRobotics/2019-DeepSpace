@@ -10,7 +10,7 @@ public class PegLeg {
 
     public PegLeg() {
         
-        solenoid1 = new Solenoid(RobotMap.pegLeg);
+        solenoid1 = new Solenoid(RobotMap.pegLegSol);
     }
     
     public void deploy() {

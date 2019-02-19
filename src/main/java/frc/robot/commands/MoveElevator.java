@@ -6,16 +6,9 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class MoveElevator extends Command {
 
-    protected double elev = 0.0;
-
     public MoveElevator() {
         
         super();
-    }
-
-    protected void intitalize() {
-
-        OI.elev1.reset();
     }
 
     protected int checkSwitches() {
@@ -26,7 +19,7 @@ public class MoveElevator extends Command {
     @Override
     protected void execute() {
 
-        elev = OI.gamePad.getRawAxis(RobotMap.leftJoystick);
+        double elev = OI.gamePad.getRawAxis(RobotMap.leftJoystick);
         double motorSpeed = -1*elev;
         if (OI.limitOn) {
 
@@ -34,6 +27,7 @@ public class MoveElevator extends Command {
                 motorSpeed = 0.0;
             }
         }
+        OI.elev1.elevate(motorSpeed);
     }
     
     protected boolean isFinished() {
@@ -46,8 +40,4 @@ public class MoveElevator extends Command {
         OI.elev1.stop();
     }
 
-    protected void interruppted() {
-
-        OI.elev1.stop();
-    }
 }
