@@ -47,11 +47,7 @@ public class RobotMap {
 	public static int wristSolenoid2 = 7;
 	
 	//Lock
-<<<<<<< HEAD
 	public static int wristLockSol = 4;
-=======
-	public static int wristLock = 3;
->>>>>>> 08831865c458182a788e0576b52875d1fac1b04c
 
 	//Peg Leg
 	public static int pegLegSol = 1;
