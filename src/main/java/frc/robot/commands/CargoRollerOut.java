@@ -15,7 +15,7 @@ public class CargoRollerOut extends Command {
     protected void initialize() {
         super.initialize();
         OI.cargo.deposit();
-        RioLogger.errorLog("CargoRollerIn.initialize() called");
+        RioLogger.errorLog("CargoRollerOut.initialize() called");
     }
 
     @Override
