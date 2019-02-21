@@ -12,14 +12,18 @@ public class CargoRollerIn extends Command {
     }
 
     @Override
-    protected void execute() {
-
+    protected void initialize() {
+        super.initialize();
         OI.cargo.intake();
+        RioLogger.errorLog("CargoRollerIn.initialize() called");
+    }
+
+    @Override
+    protected void execute() {
     }
 
     @Override
     protected boolean isFinished() {
-
         return false;
     }
 
@@ -33,6 +37,5 @@ public class CargoRollerIn extends Command {
     protected void end() {
         OI.cargo.stop();
         RioLogger.errorLog("CargoRollerIn.stop() called");
-
     }
 }
