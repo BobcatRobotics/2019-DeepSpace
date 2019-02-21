@@ -7,7 +7,8 @@ public class WristDeliever extends Command {
     boolean toggle = false;
 
     public WristDeliever() {
-		super();
+        super();
+        requires(OI.wrist);
     }
     
     @Override
@@ -17,8 +18,6 @@ public class WristDeliever extends Command {
 
     @Override
     protected void execute () {
-        
-        
     }
 
     @Override
@@ -26,13 +25,5 @@ public class WristDeliever extends Command {
 		return true;
 	}
 
-	@Override
-	protected void end() {
-        OI.wrist.deliver();;
-	}
-    
-    @Override
-	protected void interrupted() {
-        OI.wrist.deliver();;
-	}
+
 }

@@ -7,12 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 public class MoveElevator extends Command {
 
     public MoveElevator() {
-        
         super();
+        requires(OI.elev1);
     }
 
     protected int checkSwitches() {
-
         return OI.elev1.checkSwitches();
     }
 
@@ -20,7 +19,7 @@ public class MoveElevator extends Command {
     protected void execute() {
 
         double elev = OI.gamePad.getRawAxis(RobotMap.gamePadLeftPwrStick);
-        double motorSpeed = -1*elev;
+        double motorSpeed = -1 * elev;
         if (OI.limitOn) {
 
             if ((motorSpeed > 0.0) || (motorSpeed < 0.0)) {
@@ -29,15 +28,12 @@ public class MoveElevator extends Command {
         }
         OI.elev1.elevate(motorSpeed);
     }
-    
-    protected boolean isFinished() {
 
+    protected boolean isFinished() {
         return false;
     }
 
     protected void end() {
-
         OI.elev1.stop();
     }
-
 }

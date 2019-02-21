@@ -2,37 +2,45 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
+import frc.robot.lib.RioLogger;
 
 public class WristDeployed extends Command {
     boolean toggle = false;
 
     public WristDeployed() {
-		super();
+        super();
+        requires(OI.wrist);
+        requires(OI.panel);
+        RioLogger.errorLog("WristDeployed() created.");
     }
-    
+
     @Override
     protected void initialize() {
-        OI.wrist.deploy();;    
+        RioLogger.errorLog("WristDeployed.initialize() called.");
     }
 
     @Override
-    protected void execute () {
-        //TODO update these once the wrist is more defined
-        //Possibly extend to individual commands
-    }
-
-    @Override
-	protected boolean isFinished() {
-		return true;
-	}
-
-	@Override
-	protected void end() {
+    protected void execute() {
+        RioLogger.errorLog("WristDeployed.execute() called.");
+        // When the wrist it deployed, the panel intake needs to be retracted
+        // so that it does not hit the ground and get damaged
+        OI.panel.setIn();
         OI.wrist.deploy();
-	}
-    
+    }
+
     @Override
-	protected void interrupted() {
-        OI.wrist.deploy();;
-	}
+    protected boolean isFinished() {
+        RioLogger.errorLog("WristDeployed.isFinished() called. Returning true.");
+        return true;
+    }
+
+    @Override
+    protected void end() {
+        RioLogger.errorLog("WristDeployed.end() called.");
+    }
+
+    @Override
+    protected void interrupted() {
+        RioLogger.errorLog("WristDeployed.interrupted() called.");
+    }
 }

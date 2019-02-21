@@ -21,9 +21,11 @@ public class OI {
   public static SmartDashLog smartLog = new SmartDashLog();
 
   // Drive Chain Subsystem
+  // Competition and Practive Bot
   public static DriveTrain driveTrain = new DriveTrain();
+  // SKATEBOT
+  // public static DriveTrainSkatebot driveTrain = new DriveTrainSkatebot();
 
-  
   //Wrist Subsystem
   public static Wrist wrist = new Wrist();
 

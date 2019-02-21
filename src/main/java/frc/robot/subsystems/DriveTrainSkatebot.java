@@ -1,36 +1,25 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.RobotMap;
-import frc.robot.lib.RioLogger;
 
-public class DriveTrain extends Subsystem {
+import edu.wpi.first.wpilibj.command.Subsystem;
+
+public class DriveTrainSkatebot extends Subsystem {
 	/** Inverts drive direction **/
 	private static final double INVERT_MOTOR = -1.0;
 	
 	private WPI_VictorSPX leftFront;
-	private WPI_VictorSPX leftMiddle;
-	private WPI_VictorSPX leftRear;
 	private WPI_VictorSPX rightFront;
-	private WPI_VictorSPX rightMiddle;
-	private WPI_VictorSPX rightRear;
 	private boolean invertLeft = true;
 	private double leftPower = 0.0;
 	private double rightPower = 0.0;
 
-	public DriveTrain() {
-		super();
+	public DriveTrainSkatebot() {
 		// Initialize Drive Train
-		leftFront = new WPI_VictorSPX(RobotMap.driveLeftMotorFront);
-		leftMiddle = new WPI_VictorSPX(RobotMap.driveLeftMotorMiddle);
-		leftRear = new WPI_VictorSPX(RobotMap.driveLeftMotorRear);
-		rightFront = new WPI_VictorSPX(RobotMap.driveRightMotorFront);
-		rightMiddle = new WPI_VictorSPX(RobotMap.driveRightMotorMiddle);
-		rightRear = new WPI_VictorSPX(RobotMap.driveRightMotorRear);
-		setLeftMotorsReverse(false);
-		RioLogger.log("DriveTrain() created.");
+		leftFront = new WPI_VictorSPX(1);
+		rightFront = new WPI_VictorSPX(0);
 	}
+	
 	
 	// Put methods for controlling this subsystem here. Call these from Commands.
 	public void setLeftMotorsReverse(boolean invert) {
@@ -76,22 +65,14 @@ public class DriveTrain extends Subsystem {
 			rightPwr *= INVERT_MOTOR;
 		
 		leftFront.set(leftPwr);
-		leftMiddle.set(leftPwr);
-		leftRear.set(leftPwr);
 		rightFront.set(rightPwr);
-		rightMiddle.set(rightPwr);
-		rightRear.set(rightPwr);
 	}
 
 	public void stop() {
 		leftPower = 0.0;
 		rightPower = 0.0;
 		leftFront.stopMotor();
-		leftMiddle.stopMotor();
-		leftRear.stopMotor();
 		rightFront.stopMotor();
-		rightMiddle.stopMotor();
-		rightRear.stopMotor();;
 	}
 
 	public void reset() {
