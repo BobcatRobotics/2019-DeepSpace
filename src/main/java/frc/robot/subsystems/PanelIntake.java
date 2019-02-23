@@ -15,12 +15,12 @@ public class PanelIntake extends Subsystem {
     }
 
     public void setIn() {
-        solenoid1.set(true);
+        solenoid1.set(false);
         RioLogger.errorLog("PanelIntake.setIn() solenoid1=true");
     }
 
     public void setOut() {
-        solenoid1.set(false);
+        solenoid1.set(true);
         RioLogger.errorLog("PanelIntake.setOut() solenoid1=false");
     }
 

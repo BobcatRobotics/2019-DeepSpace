@@ -27,8 +27,8 @@ public class Elevator extends Subsystem {
         elevatorMotor3 = new WPI_TalonSRX(RobotMap.elevMotor3);
 
         elevatorMotor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute,0,0);
-        elevatorMotor2.follow(elevatorMotor1);
-        elevatorMotor3.follow(elevatorMotor1);
+        //elevatorMotor2.follow(elevatorMotor1);
+        //elevatorMotor3.follow(elevatorMotor1);
         elevatorMotor1.setSelectedSensorPosition(0,0,0);
         
         tLimit = new DigitalInput(RobotMap.elevLSwitchT);
@@ -54,6 +54,8 @@ public class Elevator extends Subsystem {
 
     public void elevate(double speed) {
         elevatorMotor1.set(speed);
+        elevatorMotor2.set(speed);
+        elevatorMotor3.set(speed);
         elevatorSpeed = speed;
     }
 
