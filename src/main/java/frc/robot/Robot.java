@@ -35,10 +35,6 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Start the camera server
     CameraServer.getInstance().startAutomaticCapture();
-<<<<<<< HEAD
-=======
-
->>>>>>> 12711142fb9d27d47299909d8d36001e880e9fdc
     m_DriveWithJoysticks = new DriveWithJoysticks();
     m_MoveElevator = new MoveElevator();
     // m_RunWrist = new RunWrist();
