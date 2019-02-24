@@ -8,7 +8,8 @@ import frc.robot.lib.RioLogger;
 public class Lock extends Subsystem {
     //public static Solenoid solenoid1 = new Solenoid(RobotMap.panelSolenoid);
     private Solenoid solenoid1;
-    private boolean lockState;
+    private boolean lockStateToggle;
+    private boolean lockState=false;
 
     public Lock() {
         solenoid1 = new Solenoid(RobotMap.wristLockSol);
@@ -16,14 +17,20 @@ public class Lock extends Subsystem {
     }
     
     public void enable() {
-        lockState = !lockState;
-        solenoid1.set(lockState);
+        lockStateToggle = !lockStateToggle;
+        solenoid1.set(true);
+        lockState=true;
+
     }
 
     public void disable() {
         solenoid1.set(false);
+        lockState=false;
     }
 
+    public boolean isLocked() {
+        return lockState;
+    }
     public void reset() {
         disable();
     }

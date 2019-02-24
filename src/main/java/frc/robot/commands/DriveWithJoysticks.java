@@ -13,6 +13,10 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveWithJoysticks extends Command {
+
+	private double left = 0.0;
+	private double right = 0.0;
+	private double pegPwr = 0.0;
 	
 	public DriveWithJoysticks() {
 		super();
@@ -21,8 +25,8 @@ public class DriveWithJoysticks extends Command {
 	@Override
 	protected void execute() {
 		// Driving
-		double left = OI.leftStick.getRawAxis(Joystick.AxisType.kY.value);
-		double right = OI.rightStick.getRawAxis(Joystick.AxisType.kY.value);
+		left = OI.leftStick.getRawAxis(Joystick.AxisType.kY.value);
+		right = OI.rightStick.getRawAxis(Joystick.AxisType.kY.value);
 		if (Math.abs(right) < 0.02) {
 			right = 0.0;
 			//done to prevent motor wear, in case of joystick doesn't center
@@ -37,8 +41,21 @@ public class DriveWithJoysticks extends Command {
 		OI.driveTrain.setLeftPower(left);
 		OI.driveTrain.setRightPower(right);
 		OI.driveTrain.drive();
-	}
 
+		// Check if the lock is in the locked state, and if so, then drive
+		// the peg leg motor too
+		if (OI.lock.isLocked()) {
+			if (left<=right){
+				pegPwr = left;
+			} else {
+				pegPwr = right;
+			}
+			if (pegPwr<0.0) pegPwr=0.0;
+			OI.pegleg.drivepegmotor(pegPwr);
+		} else {
+			OI.pegleg.drivepegmotor(0.0);
+		}
+	}
 
 	@Override
 	protected boolean isFinished() {

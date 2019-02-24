@@ -67,7 +67,7 @@ public class OI {
 
   // Triggers
   public static Trigger trigShifter = new JoystickButton(rightStick, RobotMap.stickShift);
-  //public static Trigger lockAndPegTrigger = new JoystickButton(leftStick, RobotMap.lockAndPegEngage);
+  public static Trigger lockAndPegTrigger = new JoystickButton(leftStick, RobotMap.lockAndPegEngage);
 
   static {
    
@@ -84,10 +84,11 @@ public class OI {
     btnWristStow.whenPressed(new WristStowed());
     btnWristDep.whenPressed(new WristDeployed());
     btnWristDel.whenPressed(new WristDeliever());
-    //lockAndPegTrigger.whenActive(new LockEnable());
+    lockAndPegTrigger.whenActive(new LockEnable());
+    lockAndPegTrigger.whenInactive(new LockDisable());
     //lockAndPegTrigger.whenActive(new LegDeploy());
   
-    btnLock.whenPressed(new LockEnable());
+    //btnLock.whenPressed(new LockEnable());
     //btnLock.whenPressed(new LegDeploy());
     //btnUnlock.whenPressed(new LockDisable());
     //btnUnlock.whenPressed(new LegRetract());

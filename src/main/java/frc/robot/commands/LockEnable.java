@@ -18,7 +18,7 @@ public class LockEnable extends Command {
 
     @Override
     protected void execute() {
-        RioLogger.log("Lock button pressed");
+        RioLogger.log("Lock Enable button pressed");
         OI.lock.enable();
     }
 
