@@ -45,12 +45,12 @@ public class DriveWithJoysticks extends Command {
 		// Check if the lock is in the locked state, and if so, then drive
 		// the peg leg motor too
 		if (OI.lock.isLocked()) {
-			if (left<=right){
+			if (left>=right){
 				pegPwr = left;
 			} else {
 				pegPwr = right;
 			}
-			if (pegPwr<0.0) pegPwr=0.0;
+			if (pegPwr>0.0) pegPwr=0.0;
 			OI.pegleg.drivepegmotor(pegPwr);
 		} else {
 			OI.pegleg.drivepegmotor(0.0);
