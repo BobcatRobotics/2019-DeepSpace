@@ -26,7 +26,8 @@ public class RobotMap {
 	public static int leftJoystick = 0;
 	public static int rightJoystick = 1;
 	public static int gamePad = 2;
-	public static int stickShift = 3;
+	public static int stickShift = 3;  // On right stick
+	public static int lockAndPegEngage = 3; // On the left stick
 	
 	//Shifter
 	public static int shiftSolenoid = 0;

@@ -19,7 +19,7 @@ public class MoveElevator extends Command {
     protected void execute() {
 
         double elev = OI.gamePad.getRawAxis(RobotMap.gamePadLeftPwrStick);
-        double motorSpeed = -1 * elev;
+        double motorSpeed =  elev;
         if (OI.limitOn) {
 
             if ((motorSpeed > 0.0) || (motorSpeed < 0.0)) {
