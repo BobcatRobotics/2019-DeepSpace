@@ -14,12 +14,14 @@ import frc.robot.lib.RioLogger;
 
 
 public class Elevator extends Subsystem {
+    private double elevBiasDefault = -0.05;
+    private double elevScaleDefault = 0.6;
     private ShuffleboardTab tab = Shuffleboard.getTab("Elevator");
     private NetworkTableEntry elevDist = tab.add("Elevator Distance", 0).getEntry();
     private NetworkTableEntry elevVel = tab.add("Elevator Velocity", 0).getEntry();
     private NetworkTableEntry elevCmd = tab.add("Elevator Command", 0).getEntry();
-    private NetworkTableEntry elevBiasNT = tab.add("Elevator Command Bias", 0.1).getEntry();
-    private NetworkTableEntry elevScaleNT = tab.add("Elevator Command Scale", 0.6).getEntry();
+    private NetworkTableEntry elevBiasNT = tab.add("Elevator Command Bias", elevBiasDefault).getEntry();
+    private NetworkTableEntry elevScaleNT = tab.add("Elevator Command Scale", elevScaleDefault).getEntry();
 
     private WPI_TalonSRX elevatorMotor1;
     private WPI_TalonSRX elevatorMotor2;
@@ -32,8 +34,8 @@ public class Elevator extends Subsystem {
     private double elevatorVelocity = 0.0;
     private double elevatorDistance = 0.0;
 
-    private double elevScale=0.6;
-    private double elevBias=0.1;
+    private double elevBias=elevBiasDefault;
+    private double elevScale=elevScaleDefault;
 
     public Elevator() {
         elevatorMotor1 = new WPI_TalonSRX(RobotMap.elevMotor1);
@@ -45,8 +47,8 @@ public class Elevator extends Subsystem {
         tab.add("elevMotor3", elevatorMotor3);
 
         elevatorMotor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute,0,0);
-        elevatorMotor2.follow(elevatorMotor1);
-        elevatorMotor3.follow(elevatorMotor1);
+        //elevatorMotor2.follow(elevatorMotor1);  // Enable if using PID, and remove line in execute()
+        //elevatorMotor3.follow(elevatorMotor1);  // Enable if using PID, and remove line in execute()
         elevatorMotor1.setSelectedSensorPosition(0,0,0);
 
         // Configure the Talons to be in brake mode
@@ -54,8 +56,8 @@ public class Elevator extends Subsystem {
         elevatorMotor2.setNeutralMode(NeutralMode.Brake);
         elevatorMotor3.setNeutralMode(NeutralMode.Brake);
         
-        tLimit = new DigitalInput(RobotMap.elevLSwitchT);
-        bLimit = new DigitalInput(RobotMap.elevLSwitchB);
+        tLimit = new DigitalInput(RobotMap.elevLSwitchT);  // Not wired yet
+        bLimit = new DigitalInput(RobotMap.elevLSwitchB);  // Not wired yet
 
         reset();
         RioLogger.errorLog("Elevator() created.");
@@ -76,17 +78,24 @@ public class Elevator extends Subsystem {
     }
 
     public void elevate(double cmd) {
-        elevScale=elevScaleNT.getDouble(0.6);
-        elevBias=elevBiasNT.getDouble(0.1);
-        elevatorCmd = cmd * elevScale +  elevBias;
-        elevatorMotor1.set(elevatorCmd);
-        elevatorMotor2.set(elevatorCmd);
-        elevatorMotor3.set(elevatorCmd);
+        // Get Elevator sensor info
         elevatorDistance = elevatorMotor1.getSelectedSensorPosition(0);
         elevatorVelocity = elevatorMotor1.getSelectedSensorVelocity(0);
         elevDist.setDouble(elevatorDistance);
         elevVel.setDouble(elevatorVelocity);
         elevCmd.setDouble(elevatorCmd);
+
+        // Get Scale and Bias from shuffleboard
+        elevScale=elevScaleNT.getDouble(elevScaleDefault);
+        elevBias=elevBiasNT.getDouble(elevBiasDefault);
+
+        // Process cmd and set motor commands
+        // ToDo: Put in bprotection for belt here using sensor
+        // ToDo: info or limit switch info.
+        elevatorCmd = cmd * elevScale +  elevBias;
+        elevatorMotor1.set(elevatorCmd);
+        elevatorMotor2.set(elevatorCmd);  // This to be removed if using PID and follow mode
+        elevatorMotor3.set(elevatorCmd);  // This to be removed if using PID and follow mode
     }
 
     public double getElevatorDistance() {

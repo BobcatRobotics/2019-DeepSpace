@@ -15,7 +15,7 @@ public class PanelIntakeIn extends Command {
     @Override
     protected void execute() {
         RioLogger.errorLog("PanelIntakeIn.execute() called.");
-        OI.panel.setIn();
+        OI.panel.panelInOutSetToIn();
     }
 
     @Override

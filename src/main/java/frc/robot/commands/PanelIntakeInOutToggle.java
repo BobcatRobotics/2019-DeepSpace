@@ -4,17 +4,17 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.lib.RioLogger;
 
-public class PanelIntakeOut extends Command {
+public class PanelIntakeInOutToggle extends Command {
 
-    public PanelIntakeOut() {
+    public PanelIntakeInOutToggle() {
         super();
         requires(OI.panel);
-        RioLogger.errorLog("PanelIntakeOut() Created.");
+        RioLogger.errorLog("PanelIntakeInOutToggle() Created.");
     }
 
     @Override
     protected void execute() {
-        OI.panel.panelInOutSetToOut();
+        OI.panel.panelInOutToggle();
     }
 
     @Override

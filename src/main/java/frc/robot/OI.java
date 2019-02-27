@@ -57,13 +57,12 @@ public class OI {
   // Buttons
   public static Button btnRollerIn = new JoystickButton(gamePad, RobotMap.cargoInB);
   public static Button btnRollerOut = new JoystickButton(gamePad, RobotMap.cargoOutB);
-  public static Button btnPanelIn = new JoystickButton(gamePad, RobotMap.panelInB);
-  public static Button btnPanelOut = new JoystickButton(gamePad, RobotMap.panelOutB);
+  public static Button btnPanelHold = new JoystickButton(gamePad, RobotMap.panelHoldB);
+  public static Button btnPanelRelease = new JoystickButton(gamePad, RobotMap.panelReleaseB);
   public static Button btnWristStow = new JoystickButton(gamePad, RobotMap.wristStowB);
   public static Button btnWristDep = new JoystickButton(gamePad, RobotMap.wristDepB);
   public static Button btnWristDel = new JoystickButton(gamePad, RobotMap.wristDelB);
-  public static Button btnLock = new JoystickButton(gamePad, RobotMap.lockB);
-  //public static Button btnUnlock = new JoystickButton(gamePad, RobotMap.unlockB);
+  public static Button btnPanelInOutToggle = new JoystickButton(gamePad, RobotMap.PanelIntakeInOutB);
 
   // Triggers
   public static Trigger trigShifter = new JoystickButton(rightStick, RobotMap.stickShift);
@@ -79,18 +78,13 @@ public class OI {
     trigShifter.whenInactive(new ShiftLow());
     btnRollerIn.whileHeld(new CargoRollerIn());
     btnRollerOut.whileHeld(new CargoRollerOut());
-    btnPanelIn.whenPressed(new PanelIntakeIn());
-    btnPanelOut.whenPressed(new PanelIntakeOut());
+    btnPanelHold.whenPressed(new PanelIntakeHoldPanel());
+    btnPanelRelease.whenPressed(new PanelIntakeReleasePanel());
     btnWristStow.whenPressed(new WristStowed());
     btnWristDep.whenPressed(new WristDeployed());
     btnWristDel.whenPressed(new WristDeliever());
     lockAndPegTrigger.whenActive(new LockEnable());
     lockAndPegTrigger.whenInactive(new LockDisable());
-    //lockAndPegTrigger.whenActive(new LegDeploy());
-  
-    //btnLock.whenPressed(new LockEnable());
-    //btnLock.whenPressed(new LegDeploy());
-    //btnUnlock.whenPressed(new LockDisable());
-    //btnUnlock.whenPressed(new LegRetract());
+    btnPanelInOutToggle.whenPressed(new PanelIntakeInOutToggle());
   }
 }

@@ -24,7 +24,8 @@ public class WristDeployed extends Command {
         RioLogger.errorLog("WristDeployed.execute() called.");
         // When the wrist it deployed, the panel intake needs to be retracted
         // so that it does not hit the ground and get damaged
-        OI.panel.setIn();
+        OI.panel.holdPanel();
+        OI.panel.panelInOutSetToIn();
         OI.wrist.deploy();
     }
 
