@@ -45,24 +45,27 @@ public class Robot extends TimedRobot {
       // Get the UsbCamera from CameraServer
       UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
       // Set the resolution
-      camera.setResolution(1280, 720);
-
+      // camera.setResolution(1280, 720);
+      camera.setResolution(320, 240);
+  /*
       // Get a CvSink. This will capture Mats from the camera
       CvSink cvSink = CameraServer.getInstance().getVideo();
       // Setup a CvSource. This will send images back to the Dashboard
-      CvSource outputStream
-          = CameraServer.getInstance().putVideo("Rectangle", 320, 180);
+      // CvSource outputStream = CameraServer.getInstance().putVideo("Rectangle", 320, 180);
+      CvSource outputStream = CameraServer.getInstance().putVideo("Rectangle", 320, 240);
 
       // Mats are very memory expensive. Lets reuse these Mats.
       Mat matIn  = new Mat();
       Mat matOut = new Mat();
-      Mat matSize = new Mat();
-      Size scaleSize = new Size(320,180);
+      //Mat matSize = new Mat();
+      //Size scaleSize = new Size(320,180);
 
       // This cannot be 'true'. The program will never exit if it is. This
       // lets the robot stop this thread when restarting robot code or
       // deploying.
+  */
       while (!Thread.interrupted()) {
+      /*
         // Tell the CvSink to grab a frame from the camera and put it
         // in the source mat.  If there is an error notify the output.
         if (cvSink.grabFrame(matIn) == 0) {
@@ -78,10 +81,12 @@ public class Robot extends TimedRobot {
         Imgproc.cvtColor(matIn, matOut, Imgproc.COLOR_BGR2GRAY);
        
         // Convert the size of the image (again hoping to save bandwith)
-        Imgproc.resize(matOut, matSize, scaleSize, 0, 0, Imgproc.INTER_NEAREST);
+        // Imgproc.resize(matOut, matSize, scaleSize, 0, 0, Imgproc.INTER_NEAREST);
         
         // Give the output stream a new image to display
-        outputStream.putFrame(matSize);
+        // outputStream.putFrame(matSize);
+        outputStream.putFrame(matOut);
+      */
       }
     });
     m_visionThread.setDaemon(true);
