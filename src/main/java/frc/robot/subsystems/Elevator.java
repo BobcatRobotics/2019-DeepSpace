@@ -57,7 +57,7 @@ public class Elevator extends Subsystem {
         elevatorMotor3.setNeutralMode(NeutralMode.Brake);
         
         tLimit = new DigitalInput(RobotMap.elevLSwitchT);  // Not wired yet
-        bLimit = new DigitalInput(RobotMap.elevLSwitchB);  // Not wired yet
+        bLimit = new DigitalInput(RobotMap.elevLSwitchB);  
 
         reset();
         RioLogger.errorLog("Elevator() created.");

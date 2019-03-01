@@ -24,8 +24,8 @@ public class RobotMap {
 	public static int elevMotor3 = 12;
 
 	// Elevator Limit switches DIO channels
-	public static int elevLSwitchT = 0;
-	public static int elevLSwitchB = 1;
+	public static int elevLSwitchT = 1;
+	public static int elevLSwitchB = 0;
 
  	// Define Joy Sticks and gamepads channels
 	public static int leftJoystick = 0;     // Left stick is stick 0, and should be first USB
@@ -55,5 +55,5 @@ public class RobotMap {
 	public static int wristSolenoid2 = 7;     // Second wrist solenoid (small tilt to wrist)
 	public static int wristLockSol = 4;       // Solenoid to engage wrist lock and peg leg latches
 	public static int panelGripSolenoid = 6;  // Solenoid to engage panel hold/release mechanism
-	public static int panelInOutSolenoid = 1; // Solenoid to move panel mechanism in/out
+	public static int panelInOutSolenoid = 2; // Solenoid to move panel mechanism in/out
 }
