@@ -22,7 +22,7 @@ public class DriveSkateBot extends Command {
 	protected void execute() {
 		// Driving
 		double left = OI.gamePad.getRawAxis(Joystick.AxisType.kY.value);
-		double right = OI.gamePad.getRawAxis(Joystick.AxisType.kZ.value);
+		double right = OI.gamePad.getRawAxis(Joystick.AxisType.kTwist.value);
 		if (Math.abs(right) < 0.02) {
 			right = 0.0;
 			//done to prevent motor wear, in case of joystick doesn't center

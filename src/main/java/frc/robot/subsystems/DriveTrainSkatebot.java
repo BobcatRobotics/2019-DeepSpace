@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -9,7 +10,7 @@ public class DriveTrainSkatebot extends Subsystem {
 	private static final double INVERT_MOTOR = -1.0;
 	
 	private WPI_VictorSPX leftFront;
-	private WPI_VictorSPX rightFront;
+	private WPI_TalonSRX rightFront;
 	private boolean invertLeft = true;
 	private double leftPower = 0.0;
 	private double rightPower = 0.0;
@@ -17,7 +18,7 @@ public class DriveTrainSkatebot extends Subsystem {
 	public DriveTrainSkatebot() {
 		// Initialize Drive Train
 		leftFront = new WPI_VictorSPX(1);
-		rightFront = new WPI_VictorSPX(0);
+		rightFront = new WPI_TalonSRX(0);
 	}
 	
 	
@@ -64,8 +65,9 @@ public class DriveTrainSkatebot extends Subsystem {
 		else
 			rightPwr *= INVERT_MOTOR;
 		
-		leftFront.set(leftPwr);
-		rightFront.set(rightPwr);
+		double scale = 0.5;
+		leftFront.set(leftPwr * scale);
+		rightFront.set(rightPwr * scale);
 	}
 
 	public void stop() {

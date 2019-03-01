@@ -26,7 +26,7 @@ public class OI {
   // SKATEBOT
   // public static DriveTrainSkatebot driveTrain = new DriveTrainSkatebot();
 
-  //Wrist Subsystem
+  // Wrist Subsystem
   public static Wrist wrist = new Wrist();
 
   // Joysticks
@@ -34,25 +34,27 @@ public class OI {
   public static Joystick leftStick = new Joystick(RobotMap.leftJoystick);
   public static Joystick gamePad = new Joystick(RobotMap.gamePad);
 
-  //Solenoids
+  // Solenoids
   public static Solenoid shifter = new Solenoid(RobotMap.shiftSolenoid);
 
-  //Elevator
+  // Elevator
   public static Elevator elev1 = new Elevator();
   public static boolean limitOn = false;
 
-  //Panel Intake
+  // Panel Intake
   public static PanelIntake panel = new PanelIntake();
 
-  //Cargo Roller
+  // Cargo Roller
   public static CargoRoller cargo = new CargoRoller();
 
-  //Peg leg
+  // Peg leg
   public static PegLeg pegleg = new PegLeg();
 
-  //Lock
+  // Lock
   public static Lock lock = new Lock();
 
+  // Camera
+  public static Camera camera = new Camera();
 
   // Buttons
   public static Button btnRollerIn = new JoystickButton(gamePad, RobotMap.cargoInB);
@@ -69,10 +71,10 @@ public class OI {
   public static Trigger lockAndPegTrigger = new JoystickButton(leftStick, RobotMap.lockAndPegEngage);
 
   static {
-   
     // Start Logging Thread
-    logFile = RioLoggerThread.getInstance();
-    RioLogger.log("OI static block finished.");
+    // logFile = RioLoggerThread.getInstance();
+    // Initialize Camera
+    camera.initializeCamera();
 
     trigShifter.whenActive(new ShiftHigh());
     trigShifter.whenInactive(new ShiftLow());
@@ -86,5 +88,6 @@ public class OI {
     lockAndPegTrigger.whenActive(new LockEnable());
     lockAndPegTrigger.whenInactive(new LockDisable());
     btnPanelInOutToggle.whenPressed(new PanelIntakeInOutToggle());
+    RioLogger.log("OI static block finished.");
   }
 }
