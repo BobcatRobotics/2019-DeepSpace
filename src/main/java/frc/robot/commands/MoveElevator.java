@@ -20,10 +20,12 @@ public class MoveElevator extends Command {
 
         double elev = OI.gamePad.getRawAxis(RobotMap.gamePadLeftPwrStick);
         double motorSpeed =  elev;
-        if (OI.elev1.lowerLimit()) {
+        if (!OI.elev1.isLimDisable()) {
+            if (OI.elev1.lowerLimit()) {
 
-            if (motorSpeed > 0.0) {
-                motorSpeed = 0.0;
+                if (motorSpeed > 0.0) {
+                    motorSpeed = 0.0;
+                }
             }
         }
         OI.elev1.elevate(motorSpeed);

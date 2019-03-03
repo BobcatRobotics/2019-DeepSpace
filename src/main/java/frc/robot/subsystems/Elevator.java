@@ -16,12 +16,14 @@ import frc.robot.lib.RioLogger;
 public class Elevator extends Subsystem {
     private double elevBiasDefault = -0.05;
     private double elevScaleDefault = 0.6;
+    private boolean elevLimDisDef = false;
     private ShuffleboardTab tab = Shuffleboard.getTab("Elevator");
     private NetworkTableEntry elevDist = tab.add("Elevator Distance", 0).getEntry();
     private NetworkTableEntry elevVel = tab.add("Elevator Velocity", 0).getEntry();
     private NetworkTableEntry elevCmd = tab.add("Elevator Command", 0).getEntry();
     private NetworkTableEntry elevBiasNT = tab.add("Elevator Command Bias", elevBiasDefault).getEntry();
     private NetworkTableEntry elevScaleNT = tab.add("Elevator Command Scale", elevScaleDefault).getEntry();
+    private NetworkTableEntry elevLimitDisable = tab.add("Elevator Disable Limits", elevLimDisDef).getEntry();
 
     private WPI_TalonSRX elevatorMotor1;
     private WPI_TalonSRX elevatorMotor2;
@@ -128,6 +130,11 @@ public class Elevator extends Subsystem {
 
     public boolean lowerLimit() {
         return bLimit.get();
+    }
+
+    public boolean isLimDisable() {
+
+        return elevLimitDisable.getBoolean(elevLimDisDef);
     }
 
     public int checkSwitches() {
