@@ -44,6 +44,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
+    OI.elev1.getElevatorDistance();
+    OI.elev1.getElevatorVelocity();
   }
 
   @Override

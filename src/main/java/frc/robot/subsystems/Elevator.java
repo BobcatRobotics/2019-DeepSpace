@@ -23,7 +23,7 @@ public class Elevator extends Subsystem {
     private NetworkTableEntry elevCmd = tab.add("Elevator Command", 0).getEntry();
     private NetworkTableEntry elevBiasNT = tab.add("Elevator Command Bias", elevBiasDefault).getEntry();
     private NetworkTableEntry elevScaleNT = tab.add("Elevator Command Scale", elevScaleDefault).getEntry();
-    private NetworkTableEntry elevLimitDisable = tab.add("Elevator Disable Limits", elevLimDisDef).getEntry();
+    private NetworkTableEntry elevLimitDisable = tab.add("Elevator Disable ALL Limits", elevLimDisDef).getEntry();
 
     private WPI_TalonSRX elevatorMotor1;
     private WPI_TalonSRX elevatorMotor2;
@@ -81,10 +81,8 @@ public class Elevator extends Subsystem {
 
     public void elevate(double cmd) {
         // Get Elevator sensor info
-        elevatorDistance = elevatorMotor1.getSelectedSensorPosition(0);
-        elevatorVelocity = elevatorMotor1.getSelectedSensorVelocity(0);
-        elevDist.setDouble(elevatorDistance);
-        elevVel.setDouble(elevatorVelocity);
+        getElevatorDistance();
+        getElevatorVelocity();
         elevCmd.setDouble(elevatorCmd);
 
         // Get Scale and Bias from shuffleboard
@@ -101,10 +99,20 @@ public class Elevator extends Subsystem {
     }
 
     public double getElevatorDistance() {
+        
+        if (!isLimDisable() && lowerLimit()) {
+
+            elevatorMotor1.setSelectedSensorPosition(0, 0, 0);
+        }
+        elevatorDistance = elevatorMotor1.getSelectedSensorPosition(0);
+        elevDist.setDouble(elevatorDistance);
         return elevatorDistance;
     }
 
     public double getElevatorVelocity() {
+       
+        elevatorVelocity = elevatorMotor1.getSelectedSensorVelocity(0);
+        elevVel.setDouble(elevatorVelocity);
         return elevatorVelocity;
     }
 
@@ -125,7 +133,8 @@ public class Elevator extends Subsystem {
     }
 
     public boolean upperLimit() {
-        return tLimit.get();
+        
+        return elevatorDistance > 43000;
     }
 
     public boolean lowerLimit() {

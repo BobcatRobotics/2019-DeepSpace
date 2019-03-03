@@ -27,7 +27,16 @@ public class MoveElevator extends Command {
                     motorSpeed = 0.0;
                 }
             }
+
+            if (OI.elev1.upperLimit()) {
+            
+                if (motorSpeed < 0.0) {
+    
+                    motorSpeed = 0.0;
+                }
+            }
         }
+
         OI.elev1.elevate(motorSpeed);
     }
 
