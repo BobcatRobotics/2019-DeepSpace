@@ -25,7 +25,7 @@ public class RobotMap {
 
 	// Elevator Limit switches DIO channels
 	public static int elevLSwitchT = 1;
-	public static int elevLSwitchB = 0;
+	public static int elevLSwitchB = 9;
 
  	// Define Joy Sticks and gamepads channels
 	public static int leftJoystick = 0;     // Left stick is stick 0, and should be first USB
