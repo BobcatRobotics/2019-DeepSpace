@@ -23,45 +23,49 @@ public class Camera extends Subsystem {
     }
 
     public void initializeCamera() {
-        CameraServer inst = CameraServer.getInstance();
-        CameraFileReader camReader = new CameraFileReader();
+        UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+        camera.setResolution(320,240);
+        camera.setFPS(30);
+
+        // CameraServer inst = CameraServer.getInstance();
+        // CameraFileReader camReader = new CameraFileReader();
         
-        m_visionThread = new Thread(() -> {
-            CameraConfig config = null;
+        // m_visionThread = new Thread(() -> {
+        //     CameraConfig config = null;
 
-            if (readJSONFile) {
-                RioLogger.log("Reading Camera JSON File");
-                camReader.readCameraConfigFile();
-                RioLogger.log("Camera File Reader is " + camReader.toString());
-                if (camReader.isReadConfig()) {
-                    config = camReader.getPrimaryCamera();
-                    RioLogger.log("Primary Camera is " + config.toString());
-                    name = config.getName();
-                    path = config.getPath();
-                }
-            }
+        //     if (readJSONFile) {
+        //         RioLogger.log("Reading Camera JSON File");
+        //         camReader.readCameraConfigFile();
+        //         RioLogger.log("Camera File Reader is " + camReader.toString());
+        //         if (camReader.isReadConfig()) {
+        //             config = camReader.getPrimaryCamera();
+        //             RioLogger.log("Primary Camera is " + config.toString());
+        //             name = config.getName();
+        //             path = config.getPath();
+        //         }
+        //     }
 
-            UsbCamera camera = new UsbCamera(name, path);
-            // Set the resolution
-            // camera.setResolution(1280, 720);
-            // camera.setResolution(320, 240);
-            MjpegServer server = inst.startAutomaticCapture(camera);
+        //     UsbCamera camera = new UsbCamera(name, path);
+        //     // Set the resolution
+        //     // camera.setResolution(1280, 720);
+        //     // camera.setResolution(320, 240);
+        //     MjpegServer server = inst.startAutomaticCapture(camera);
 
-            if (camReader.isReadConfig()) {
-                camera.setConfigJson(config.getCameraConfig());
-                camera.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
-                server.setConfigJson(config.getStreamConfig());
-            }
+        //     if (camReader.isReadConfig()) {
+        //         camera.setConfigJson(config.getCameraConfig());
+        //         camera.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
+        //         server.setConfigJson(config.getStreamConfig());
+        //     }
 
-            RioLogger.log("Starting camera '" + name + "' on " + path);
-            RioLogger.log("Camera settings:" + cameraValues(camera));
+        //     RioLogger.log("Starting camera '" + name + "' on " + path);
+        //     RioLogger.log("Camera settings:" + cameraValues(camera));
 
-            while (!Thread.interrupted()) {
+        //     while (!Thread.interrupted()) {
 
-            }
-        });
-        m_visionThread.setDaemon(true);
-        m_visionThread.start();
+        //     }
+        // });
+        // m_visionThread.setDaemon(true);
+        // m_visionThread.start();
     }
 
     @Override

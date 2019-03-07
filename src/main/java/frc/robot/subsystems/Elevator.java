@@ -156,6 +156,17 @@ public class Elevator extends Subsystem {
         }
     }
 
+    public void setElevBrakeMode() {
+        elevatorMotor1.setNeutralMode(NeutralMode.Brake);
+        elevatorMotor2.setNeutralMode(NeutralMode.Brake);
+        elevatorMotor3.setNeutralMode(NeutralMode.Brake);
+    }
+
+    public void setElevCoastMode() {
+        elevatorMotor1.setNeutralMode(NeutralMode.Coast);
+        elevatorMotor2.setNeutralMode(NeutralMode.Coast);
+        elevatorMotor3.setNeutralMode(NeutralMode.Coast);
+    }
     public void displayDashboard() {
         SmartDashboard.putBoolean("Current Upper Value", tLimit.get());
         SmartDashboard.putBoolean("Current Lower Value", bLimit.get());

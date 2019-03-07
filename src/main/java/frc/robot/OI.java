@@ -54,7 +54,7 @@ public class OI {
   public static Lock lock = new Lock();
 
   // Camera
-  //public static Camera camera = new Camera();
+  public static Camera camera = new Camera();
 
   // Buttons
   public static Button btnRollerIn = new JoystickButton(gamePad, RobotMap.cargoInB);
@@ -74,7 +74,7 @@ public class OI {
     // Start Logging Thread
     // logFile = RioLoggerThread.getInstance();
     // Initialize Camera
-    //camera.initializeCamera();
+    camera.initializeCamera();
 
     trigShifter.whenActive(new ShiftHigh());
     trigShifter.whenInactive(new ShiftLow());
