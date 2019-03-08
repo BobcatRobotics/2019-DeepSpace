@@ -14,10 +14,7 @@ import frc.robot.lib.RioLogger;
  * Camera Subsystem. Allows camera to be initialized from JSON file
  */
 public class Camera extends Subsystem {
-    private Thread m_visionThread;
-    private boolean readJSONFile = true;
-    private String name = "Bobcat Vision";
-    private String path = "/dev/video0";
+   
 
     public Camera() {
     }
@@ -26,6 +23,7 @@ public class Camera extends Subsystem {
         UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
         camera.setResolution(320,240);
         camera.setFPS(30);
+        
 
         // CameraServer inst = CameraServer.getInstance();
         // CameraFileReader camReader = new CameraFileReader();
