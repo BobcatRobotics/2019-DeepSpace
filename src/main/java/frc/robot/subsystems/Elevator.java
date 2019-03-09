@@ -14,7 +14,7 @@ import frc.robot.lib.RioLogger;
 
 
 public class Elevator extends Subsystem {
-    private double elevBiasDefault = -0.05;
+    private double elevBiasDefault = -0.04;
     private double elevScaleDefault = 0.6;
     private boolean elevLimDisDef = false;
     private ShuffleboardTab tab = Shuffleboard.getTab("Elevator");
@@ -92,6 +92,11 @@ public class Elevator extends Subsystem {
         // Process cmd and set motor commands
         // ToDo: Put in bprotection for belt here using sensor
         // ToDo: info or limit switch info.
+        if (!lowerLimit() || isLimDisable()) {
+            elevBias = elevBiasDefault;
+        } else {
+            elevBias = 0.0;
+        }
         elevatorCmd = cmd * elevScale +  elevBias;
         elevatorMotor1.set(elevatorCmd);
         elevatorMotor2.set(elevatorCmd);  // This to be removed if using PID and follow mode
@@ -134,7 +139,7 @@ public class Elevator extends Subsystem {
 
     public boolean upperLimit() {
         
-        return elevatorDistance > 43000;
+        return elevatorDistance > 39500;
     }
 
     public boolean lowerLimit() {
