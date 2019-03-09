@@ -21,6 +21,7 @@ public class Elevator extends Subsystem {
     private NetworkTableEntry elevDist = tab.add("Elevator Distance", 0).getEntry();
     private NetworkTableEntry elevVel = tab.add("Elevator Velocity", 0).getEntry();
     private NetworkTableEntry elevCmd = tab.add("Elevator Command", 0).getEntry();
+    private NetworkTableEntry elevLimState = tab.add("ElevLimitState",0).getEntry();
     private NetworkTableEntry elevBiasNT = tab.add("Elevator Command Bias", elevBiasDefault).getEntry();
     private NetworkTableEntry elevScaleNT = tab.add("Elevator Command Scale", elevScaleDefault).getEntry();
     private NetworkTableEntry elevLimitDisable = tab.add("Elevator Disable ALL Limits", elevLimDisDef).getEntry();
@@ -31,6 +32,9 @@ public class Elevator extends Subsystem {
 
     private DigitalInput tLimit;
     private DigitalInput bLimit;
+
+    private boolean limitsDisabled = false;
+    private boolean limitsDisableButtonActivated = false;
 
     private double elevatorCmd = 0.0;
     private double elevatorVelocity = 0.0;
@@ -148,9 +152,28 @@ public class Elevator extends Subsystem {
 
     public boolean isLimDisable() {
 
-        return elevLimitDisable.getBoolean(elevLimDisDef);
+        if (elevLimitDisable.getBoolean(elevLimDisDef) || limitsDisableButtonActivated) {
+           limitsDisabled = true;
+        } else {
+           limitsDisabled = false;
+        }
+        elevLimState.setBoolean(!limitsDisabled);
+        return limitsDisabled;
     }
 
+    public void setLmitDisableStatusTrue() {
+        limitsDisableButtonActivated = true;
+    }
+    public void setLmitDisableStatusFalse() {
+        limitsDisableButtonActivated = false;
+    }
+    public void setLmitDisableStatusToggle() {
+        limitsDisableButtonActivated = !limitsDisableButtonActivated;
+    }
+
+    public boolean getElevLimitStatus() {
+        return !limitsDisabled;
+    }
     public int checkSwitches() {
         if (upperLimit()) {
             return 1;

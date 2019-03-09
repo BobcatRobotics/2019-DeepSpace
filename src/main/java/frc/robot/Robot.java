@@ -44,12 +44,14 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     // Set elevator motors to coast mode
     OI.elev1.setElevCoastMode();
+    OI.elev1.setLmitDisableStatusFalse();
   }
 
   @Override
   public void disabledPeriodic() {
     OI.elev1.getElevatorDistance();
     OI.elev1.getElevatorVelocity();
+    OI.elev1.getElevLimitStatus();
   }
 
   @Override

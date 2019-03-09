@@ -18,13 +18,13 @@ public class Lock extends Subsystem {
     
     public void enable() {
         lockStateToggle = !lockStateToggle;
-        solenoid1.set(true);
+        solenoid1.set(false);
         lockState=true;
 
     }
 
     public void disable() {
-        solenoid1.set(false);
+        solenoid1.set(true);
         lockState=false;
     }
 

@@ -87,7 +87,7 @@ public class OI {
     btnWristDel.whenPressed(new WristDeliever());
     lockAndPegTrigger.whenActive(new LockEnable());
     lockAndPegTrigger.whenInactive(new LockDisable());
-    btnPanelInOutToggle.whenPressed(new PanelIntakeInOutToggle());
+    btnPanelInOutToggle.whenPressed(new LimitToggle());
     RioLogger.log("OI static block finished.");
   }
 }
