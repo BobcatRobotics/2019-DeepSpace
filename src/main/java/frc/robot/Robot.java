@@ -88,7 +88,7 @@ public class Robot extends TimedRobot {
       m_DriveWithJoysticks.start();
       m_MoveElevator.start();
 
-      commandsStarted = true;
+      //commandsStarted = true;
     }
   }
 }
