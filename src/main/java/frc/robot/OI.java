@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.lib.RioLogger;
 import frc.robot.lib.RioLoggerThread;
 import frc.robot.lib.SmartDashLog;
@@ -89,5 +90,8 @@ public class OI {
     lockAndPegTrigger.whenInactive(new LockDisable());
     btnPanelInOutToggle.whenPressed(new LimitToggle());
     RioLogger.log("OI static block finished.");
+  }
+  public static void displayDashboard() {
+    SmartDashboard.putNumber("Current gamepad dpad pov value:", gamePad.getPOV());
   }
 }

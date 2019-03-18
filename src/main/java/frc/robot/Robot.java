@@ -52,11 +52,14 @@ public class Robot extends TimedRobot {
     OI.elev1.getElevatorDistance();
     OI.elev1.getElevatorVelocity();
     OI.elev1.getElevLimitStatus();
+    OI.wrist.displayDashboard();
+    OI.displayDashboard();
   }
 
   @Override
   public void autonomousInit() {
     startCommands();
+    OI.lock.disable();
    }
 
   @Override
@@ -67,11 +70,13 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     startCommands();
+    OI.lock.disable();
    }
 
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    OI.wrist.displayDashboard();
  }
 
   // This function is called periodically during test mode.

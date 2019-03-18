@@ -14,17 +14,17 @@ import frc.robot.lib.RioLogger;
 
 
 public class Elevator extends Subsystem {
-    private double elevBiasDefault = -0.04;
-    private double elevScaleDefault = 0.6;
+    private double elevBiasDefault = -0.05;  // Competition was -0.04 at Waterbury
+    private double elevScaleDefault = 0.8;   // Competition is 0.6 at Waterbury
     private boolean elevLimDisDef = false;
     private ShuffleboardTab tab = Shuffleboard.getTab("Elevator");
-    private NetworkTableEntry elevDist = tab.add("Elevator Distance", 0).getEntry();
-    private NetworkTableEntry elevVel = tab.add("Elevator Velocity", 0).getEntry();
-    private NetworkTableEntry elevCmd = tab.add("Elevator Command", 0).getEntry();
-    private NetworkTableEntry elevLimState = tab.add("ElevLimitState",0).getEntry();
+    private NetworkTableEntry elevDist = tab.add("Elevator Distance", 0.0).getEntry();
+    private NetworkTableEntry elevVel = tab.add("Elevator Velocity", 0.0).getEntry();
+    private NetworkTableEntry elevCmd = tab.add("Elevator Command", 0.0).getEntry();
+    private NetworkTableEntry elevLimState = tab.add("Feedback of ElevLim State (1=on,0=off)",false).getEntry();
     private NetworkTableEntry elevBiasNT = tab.add("Elevator Command Bias", elevBiasDefault).getEntry();
     private NetworkTableEntry elevScaleNT = tab.add("Elevator Command Scale", elevScaleDefault).getEntry();
-    private NetworkTableEntry elevLimitDisable = tab.add("Elevator Disable ALL Limits", elevLimDisDef).getEntry();
+    private NetworkTableEntry elevLimitDisable = tab.add("Input to Disable All Elev Limits", elevLimDisDef).getEntry();
 
     private WPI_TalonSRX elevatorMotor1;
     private WPI_TalonSRX elevatorMotor2;
@@ -97,7 +97,8 @@ public class Elevator extends Subsystem {
         // ToDo: Put in bprotection for belt here using sensor
         // ToDo: info or limit switch info.
         if (!lowerLimit() || isLimDisable()) {
-            elevBias = elevBiasDefault;
+            // elevBias = elevBiasDefault;
+            elevBias = elevBias;
         } else {
             elevBias = 0.0;
         }
@@ -170,10 +171,12 @@ public class Elevator extends Subsystem {
     public void setLmitDisableStatusToggle() {
         limitsDisableButtonActivated = !limitsDisableButtonActivated;
     }
-
     public boolean getElevLimitStatus() {
+        isLimDisable();
+        elevLimState.setBoolean(!limitsDisabled);
         return !limitsDisabled;
     }
+
     public int checkSwitches() {
         if (upperLimit()) {
             return 1;
@@ -198,6 +201,7 @@ public class Elevator extends Subsystem {
     public void displayDashboard() {
         SmartDashboard.putBoolean("Current Upper Value", tLimit.get());
         SmartDashboard.putBoolean("Current Lower Value", bLimit.get());
+        SmartDashboard.putBoolean("Current Limit Status (1=on)", getElevLimitStatus());
     }
 
     @Override
