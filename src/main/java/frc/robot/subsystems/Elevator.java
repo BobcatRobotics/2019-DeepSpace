@@ -15,7 +15,7 @@ import frc.robot.lib.RioLogger;
 
 public class Elevator extends Subsystem {
     private double elevBiasDefault = -0.05;  // Competition was -0.04 at Waterbury
-    private double elevScaleDefault = 0.8;   // Competition is 0.6 at Waterbury
+    private double elevScaleDefault = 1.0;   // Competition is 0.6 at Waterbury
     private boolean elevLimDisDef = false;
     private ShuffleboardTab tab = Shuffleboard.getTab("Elevator");
     private NetworkTableEntry elevDist = tab.add("Elevator Distance", 0.0).getEntry();
@@ -144,7 +144,7 @@ public class Elevator extends Subsystem {
 
     public boolean upperLimit() {
         
-        return elevatorDistance > 39500;
+        return elevatorDistance > 39500;  // 39500 on competition at waterbury
     }
 
     public boolean lowerLimit() {

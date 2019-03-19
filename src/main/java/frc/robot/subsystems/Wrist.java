@@ -40,6 +40,15 @@ public class Wrist  extends Subsystem {
         return(wristState);
     }
 
+    public void deployphase1() {
+        solenoid1.set(true);
+        wristState = 2;
+    }
+
+    public void deployphase2() {
+        solenoid2.set(false);
+        wristState = 2;
+    }
     public void displayDashboard() {
         SmartDashboard.putNumber("Current Wrist State", wristState);
     }

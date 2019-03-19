@@ -11,6 +11,7 @@ public class WristDeployed extends Command {
         super();
         requires(OI.wrist);
         requires(OI.panel);
+        setTimeout(1.0);
         RioLogger.errorLog("WristDeployed() created.");
     }
 
@@ -26,17 +27,18 @@ public class WristDeployed extends Command {
         // so that it does not hit the ground and get damaged
         OI.panel.holdPanel();
         OI.panel.panelInOutSetToIn();
-        OI.wrist.deploy();
+        OI.wrist.deployphase1();
     }
 
     @Override
     protected boolean isFinished() {
         RioLogger.errorLog("WristDeployed.isFinished() called. Returning true.");
-        return true;
+        return isTimedOut();
     }
 
     @Override
     protected void end() {
+        OI.wrist.deployphase2();
         RioLogger.errorLog("WristDeployed.end() called.");
     }
 
