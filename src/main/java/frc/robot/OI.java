@@ -56,10 +56,12 @@ public class OI {
 
   // Camera
   public static Camera camera = new Camera();
+  public static Limelight limelight = new Limelight();
 
   // Buttons
   public static Button btnRollerIn = new JoystickButton(gamePad, RobotMap.cargoInB);
   public static Button btnRollerOut = new JoystickButton(gamePad, RobotMap.cargoOutB);
+  public static Button btnTargetRobot = new JoystickButton(rightStick, RobotMap.targetBot);
   public static Button btnPanelHold = new JoystickButton(gamePad, RobotMap.panelHoldB);
   public static Button btnPanelRelease = new JoystickButton(gamePad, RobotMap.panelReleaseB);
   public static Button btnWristStow = new JoystickButton(gamePad, RobotMap.wristStowB);
@@ -76,6 +78,8 @@ public class OI {
     // logFile = RioLoggerThread.getInstance();
     // Initialize Camera
     camera.initializeCamera();
+    limelight.initializeLimeLight();
+    RioLogger.errorLog("limeLight camera is initialized.");
 
     trigShifter.whenActive(new ShiftHigh());
     trigShifter.whenInactive(new ShiftLow());

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.commands.DriveWithJoysticks;
 import frc.robot.commands.MoveElevator;
+import frc.robot.lib.RioLoggerThread;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,7 +23,7 @@ import frc.robot.commands.MoveElevator;
 public class Robot extends TimedRobot {
   static OI oi = new OI();
   static boolean commandsStarted = false;
-
+  static boolean loggerInit = false;
   // Thread m_visionThread;
 
   // Command m_autonomousCommand;
@@ -71,6 +72,11 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     startCommands();
     OI.lock.disable();
+    if (!loggerInit) {
+      RioLoggerThread.getInstance();
+      RioLoggerThread.setLoggingParameters(600, 60); // 10 mins, 1 min
+      loggerInit = true;
+    }
    }
 
   @Override

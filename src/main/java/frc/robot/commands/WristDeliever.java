@@ -5,7 +5,7 @@ import frc.robot.OI;
 
 public class WristDeliever extends Command {
     boolean toggle = false;
-    CargoRollerIn4sec cargoRollerIn4sec;
+    CargoRollerInWrist cargoRollerInWrist;
 
     public WristDeliever() {
         super();
@@ -16,8 +16,8 @@ public class WristDeliever extends Command {
     protected void initialize() {
         // check the state, if 2, then run cargo in for 4 seconds
         if (OI.wrist.getWristState() == 2) {
-            cargoRollerIn4sec = new CargoRollerIn4sec();
-            cargoRollerIn4sec.start();
+            cargoRollerInWrist = new CargoRollerInWrist();
+            cargoRollerInWrist.start();
         }
         OI.wrist.deliver();
     }
