@@ -14,7 +14,7 @@ import frc.robot.lib.RioLogger;
 import frc.robot.lib.RioLoggerThread;
 
 public class TargetBot extends Command {
-	private static double DESIRED_TARGET_AREA = 17; // Area of the target when the robot reaches the wall
+	private static double DESIRED_TARGET_AREA = 10; // Area of the target when the robot reaches the wall
 	private static double DRIVE_K = 0.025; // how hard to drive fwd toward the target
 	private static double STEER_K = 0.015; // how hard to turn toward the target
 	private static double X_OFFSET = 4.5;  // The number of degrees camera is off center

@@ -62,6 +62,7 @@ public class OI {
   public static Button btnRollerIn = new JoystickButton(gamePad, RobotMap.cargoInB);
   public static Button btnRollerOut = new JoystickButton(gamePad, RobotMap.cargoOutB);
   public static Button btnTargetRobot = new JoystickButton(rightStick, RobotMap.targetBot);
+  public static Button btnDriveStraight = new JoystickButton(leftStick, RobotMap.driveStraight);
   public static Button btnPanelHold = new JoystickButton(gamePad, RobotMap.panelHoldB);
   public static Button btnPanelRelease = new JoystickButton(gamePad, RobotMap.panelReleaseB);
   public static Button btnWristStow = new JoystickButton(gamePad, RobotMap.wristStowB);
@@ -85,6 +86,7 @@ public class OI {
     trigShifter.whenInactive(new ShiftLow());
     btnRollerIn.whileHeld(new CargoRollerIn());
     btnRollerOut.whileHeld(new CargoRollerOut());
+    btnDriveStraight.whenPressed(new DriveStraight());
     btnPanelHold.whenPressed(new PanelIntakeHoldPanel());
     btnPanelRelease.whenPressed(new PanelIntakeReleasePanel());
     btnWristStow.whenPressed(new WristStowed());

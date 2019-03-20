@@ -49,6 +49,7 @@ public class RobotMap {
 	public static int wristDelB = 3;             // Button to move wrist to deliver position
 	public static int PanelIntakeInOutB = 1;     // Button to toggle write mech in/out
 	public static int targetBot = 4;			 // Button to toggle targeting bot
+	public static int driveStraight = 4;		 // Button to have bot drive straight. (mostly for testing)
 
 	// Solenoids
 	public static int shiftSolenoid = 0;      // Drive train high-low gear shift solenoid
