@@ -87,6 +87,7 @@ public class OI {
     btnRollerIn.whileHeld(new CargoRollerIn());
     btnRollerOut.whileHeld(new CargoRollerOut());
     btnDriveStraight.whenPressed(new DriveStraight());
+    btnTargetRobot.whenPressed(new TargetBot());
     btnPanelHold.whenPressed(new PanelIntakeHoldPanel());
     btnPanelRelease.whenPressed(new PanelIntakeReleasePanel());
     btnWristStow.whenPressed(new WristStowed());

@@ -50,7 +50,7 @@ public class RioLogger {
 	
 	// Log Errors --> Driver Station, console
 	public static void errorLog (String line) {
-		//DriverStation.reportError(line,false);
+		DriverStation.reportError(line,false);
 		RioLogger.log(line);
 		//System.out.println("ERROR - " + line);
 	}
