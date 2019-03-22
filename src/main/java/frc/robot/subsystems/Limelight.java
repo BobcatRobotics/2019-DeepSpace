@@ -8,6 +8,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.lib.RioLogger;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -22,6 +24,9 @@ public class Limelight extends Subsystem {
     private NetworkTableEntry tx = null;
     private NetworkTableEntry ty = null;
     private NetworkTableEntry ta = null;
+    private NetworkTableEntry ta0 = null;
+    private NetworkTableEntry ta1 = null;
+
 
     public Limelight() {
     }
@@ -34,6 +39,8 @@ public class Limelight extends Subsystem {
             tx = table.getEntry("tx");
             ty = table.getEntry("ty");
             ta = table.getEntry("ta");
+            ta0 = table.getEntry("ta0");
+            ta1 = table.getEntry("ta1");
         } catch (Exception e) {
             RioLogger.errorLog("Unable to initialize LimeLight. Error is " + e);
             return;
@@ -73,6 +80,20 @@ public class Limelight extends Subsystem {
         double dArea = 0.0;
         if (isInitialized()) {
             dArea = ta.getDouble(0.0);
+        }
+        return dArea;
+     }
+     public double rightTarget() {
+        double dArea = 0.0;
+        if (isInitialized()) {
+            dArea = ta1.getDouble(0.0);
+        }
+        return dArea;
+     }
+     public double leftTarget() {
+        double dArea = 0.0;
+        if (isInitialized()) {
+            dArea = ta0.getDouble(0.0);
         }
         return dArea;
      }
