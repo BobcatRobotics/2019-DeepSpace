@@ -5,7 +5,6 @@ import frc.robot.OI;
 import frc.robot.lib.RioLogger;
 
 public class WristDeployed extends Command {
-    boolean toggle = false;
 
     public WristDeployed() {
         super();

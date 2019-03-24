@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Solenoid;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.lib.RioLogger;
@@ -8,11 +9,14 @@ import frc.robot.lib.RioLogger;
 public class PanelIntake extends Subsystem {
     private Solenoid solenoid1;
     private Solenoid solenoid2;
+    private WPI_VictorSPX panelMotor;
     private boolean panelInOutState=false;
+    private double panelSpeed = 0.0;
 
     public PanelIntake() {
         solenoid1 = new Solenoid(RobotMap.panelGripSolenoid);
         solenoid2 = new Solenoid(RobotMap.panelInOutSolenoid);
+        panelMotor = new WPI_VictorSPX(RobotMap.panelIntakeMotor);
         RioLogger.errorLog("PanelIntake() Created.");
     }
 
@@ -32,6 +36,10 @@ public class PanelIntake extends Subsystem {
         RioLogger.errorLog("PanelIntake.panelInOutToggle() solenoid toggle");
     }
 
+    public boolean panelIntakeIsOut() {
+        return panelInOutState;
+    }
+
     public void panelInOutSetToIn() {
         solenoid2.set(false);
         panelInOutState = false;
@@ -42,9 +50,36 @@ public class PanelIntake extends Subsystem {
         panelInOutState=true;
     }
 
+    public void pushPanel() {
+        panelMotor.set(0.7);
+        panelSpeed = 0.7;
+    }
+
+    public void pullPanel() {
+        panelMotor.set(-1.0);
+        panelSpeed = -1.0;
+    }
+
+    public void pullPanelBias() {
+        panelMotor.set(-0.25);
+        panelSpeed = -0.25;
+    }
+    public void stop() {
+        panelMotor.set(0.0);
+        panelSpeed = 0.0;
+    }
+
+    public double getMotorSpeed() {
+        return panelMotor.get();
+    }
+
+    public double getCurrentSpeed() {
+        return panelSpeed;
+    }
     public void reset() {
         holdPanel();
         panelInOutSetToIn();
+        stop();
         RioLogger.errorLog("PanelIntake.reset()");
     }
 

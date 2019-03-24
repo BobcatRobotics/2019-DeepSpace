@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.commands.DriveWithJoysticks;
 import frc.robot.commands.MoveElevator;
+import frc.robot.commands.PanelIntakeOut;
 import frc.robot.lib.RioLoggerThread;
 
 /**
@@ -21,6 +22,7 @@ import frc.robot.lib.RioLoggerThread;
  * project.
  */
 public class Robot extends TimedRobot {
+  PanelIntakeOut panelIntakeOut;
   static OI oi = new OI();
   static boolean commandsStarted = false;
   static boolean loggerInit = false;
@@ -35,6 +37,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_DriveWithJoysticks = new DriveWithJoysticks();
     m_MoveElevator = new MoveElevator();
+    panelIntakeOut = new PanelIntakeOut();
   }
 
   @Override
@@ -43,9 +46,19 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
+    // If we go to disabled, put most things to their
+    // default state of command (since they will be disabled)
     // Set elevator motors to coast mode
     OI.elev1.setElevCoastMode();
+    // Turn Limits back on
     OI.elev1.setLmitDisableStatusFalse();
+    // Command panel intake to in position
+    OI.panel.panelInOutSetToIn();
+    // Command wrist to be in stowed position
+    OI.wrist.stow();
+    // Turn off limelight LEDs
+    OI.limelight.turnOffLED();
+
   }
 
   @Override
@@ -61,6 +74,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     startCommands();
     OI.lock.disable();
+    panelIntakeOut.start();
    }
 
   @Override

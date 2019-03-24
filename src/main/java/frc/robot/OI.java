@@ -62,13 +62,13 @@ public class OI {
   public static Button btnRollerIn = new JoystickButton(gamePad, RobotMap.cargoInB);
   public static Button btnRollerOut = new JoystickButton(gamePad, RobotMap.cargoOutB);
   public static Button btnTargetRobot = new JoystickButton(rightStick, RobotMap.targetBot);
-  public static Button btnDriveStraight = new JoystickButton(leftStick, RobotMap.driveStraight);
   public static Button btnPanelHold = new JoystickButton(gamePad, RobotMap.panelHoldB);
   public static Button btnPanelRelease = new JoystickButton(gamePad, RobotMap.panelReleaseB);
   public static Button btnWristStow = new JoystickButton(gamePad, RobotMap.wristStowB);
   public static Button btnWristDep = new JoystickButton(gamePad, RobotMap.wristDepB);
   public static Button btnWristDel = new JoystickButton(gamePad, RobotMap.wristDelB);
   public static Button btnPanelInOutToggle = new JoystickButton(gamePad, RobotMap.PanelIntakeInOutB);
+  public static Button btnElevLimitToggle = new JoystickButton(gamePad, RobotMap.limitDisableToggleB);
 
   // Triggers
   public static Trigger trigShifter = new JoystickButton(rightStick, RobotMap.stickShift);
@@ -86,16 +86,18 @@ public class OI {
     trigShifter.whenInactive(new ShiftLow());
     btnRollerIn.whileHeld(new CargoRollerIn());
     btnRollerOut.whileHeld(new CargoRollerOut());
-    btnDriveStraight.whenPressed(new DriveStraight());
-    btnTargetRobot.whenPressed(new TargetBot());
-    btnPanelHold.whenPressed(new PanelIntakeHoldPanel());
-    btnPanelRelease.whenPressed(new PanelIntakeReleasePanel());
+    //btnPanelHold.whenPressed(new PanelIntakeHoldPanel());
+    //btnPanelRelease.whenPressed(new PanelIntakeReleasePanel());
+    btnPanelHold.whileHeld(new PanelPullIn());
+    btnPanelRelease.whileHeld(new PanelPushOut());
     btnWristStow.whenPressed(new WristStowed());
     btnWristDep.whenPressed(new WristDeployed());
     btnWristDel.whenPressed(new WristDeliever());
     lockAndPegTrigger.whenActive(new LockEnable());
     lockAndPegTrigger.whenInactive(new LockDisable());
-    btnPanelInOutToggle.whenPressed(new LimitToggle());
+    btnPanelInOutToggle.whenPressed(new PanelIntakeInOutToggle());
+    btnElevLimitToggle.whenPressed(new LimitToggle());
+    btnTargetRobot.whenPressed(new TargetBot());
     RioLogger.log("OI static block finished.");
   }
   public static void displayDashboard() {

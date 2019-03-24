@@ -18,10 +18,12 @@ public class RobotMap {
 
 	public static int cargoMotor = 6;   // Motor to pickup and eject cargo balls
 	public static int pegLegMotor = 7;  // Motor on bottom of peg leg
+	public static int panelIntakeMotor = 8; // Pannel Intake motor for when using motorized gripper
 
 	public static int elevMotor1 = 10;   // Elevator motor 1 has the sensor attached
 	public static int elevMotor2 = 11;	
 	public static int elevMotor3 = 12;
+
 
 	// Elevator Limit switches DIO channels
 	public static int elevLSwitchT = 1;
@@ -48,8 +50,8 @@ public class RobotMap {
 	public static int wristDepB = 2;             // Button to move wrist to pickup cargo from floor
 	public static int wristDelB = 3;             // Button to move wrist to deliver position
 	public static int PanelIntakeInOutB = 1;     // Button to toggle write mech in/out
+	public static int limitDisableToggleB = 12;  // Button to toggle elevator limits on/off 
 	public static int targetBot = 2;			 // Button to toggle targeting bot
-	public static int driveStraight = 2;		 // Button to have bot drive straight. (mostly for testing)
 
 	// Solenoids
 	public static int shiftSolenoid = 0;      // Drive train high-low gear shift solenoid
