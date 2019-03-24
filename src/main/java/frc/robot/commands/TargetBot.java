@@ -48,8 +48,23 @@ public class TargetBot extends Command {
 
 		// Driving
 		Update_Limelight_Tracking();
-		double leftPwr = (driveCommand + steerCommand) * -1.0;
-		double rightPwr = (driveCommand - steerCommand) * -1.0;
+		double leftTarget = OI.limelight.leftTarget();
+		double rightTarget = OI.limelight.rightTarget();
+		
+		//Determine left and right targets for more agressive steering
+		double steerAdjustLeft = 0.0;
+		double steerAdjustRight = 0.0;
+		if(leftTarget > rightTarget){
+			steerAdjustLeft = 0.15;
+		}
+		if (rightTarget > leftTarget){
+			steerAdjustRight = 0.15;
+		}
+
+
+
+		double leftPwr = (driveCommand + steerCommand + steerAdjustLeft) * -1.0;
+		double rightPwr = (driveCommand - steerCommand - steerAdjustRight) * -1.0;
 
 		OI.driveTrain.setLeftPower(leftPwr);
 		OI.driveTrain.setRightPower(rightPwr);
@@ -77,9 +92,9 @@ public class TargetBot extends Command {
 		if (!OI.rightStick.getRawButton(RobotMap.targetBot)) {
 			stop = true;
 		}
-		if((DESIRED_TARGET_AREA - OI.limelight.targetArea()) <= 0){
-			stop = true;
-		}
+		// if((DESIRED_TARGET_AREA - OI.limelight.targetArea()) <= 0){
+		// 	stop = true;
+		// }
 		return stop;
 	}
 
@@ -96,8 +111,9 @@ public class TargetBot extends Command {
 	 * commands based on the tracking data from a limelight camera.
 	 */
 	public void Update_Limelight_Tracking() {
-		driveCommand = 0.0;
-		steerCommand = 0.0;
+		//double drive_k = 0.13;
+		//double steer_k = 0.012;
+		//Tunning parameters
 
 		hasValidTarget = OI.limelight.hasTargets();
 		if (!hasValidTarget) {
@@ -107,13 +123,17 @@ public class TargetBot extends Command {
 		// double ty = OI.limelight.y();
 		double tx = OI.limelight.x();
 		double ta = OI.limelight.targetArea();
+	
 		log.tx = tx;
 		log.ta = ta;
 
 		// Start with proportional steering
+
 		steerCommand = (tx - X_OFFSET) * STEER_K;
 		SmartDashboard.putNumber("Limelight.SteerCommand", steerCommand);
-
+		if( DESIRED_TARGET_AREA - ta < 1){
+			steerCommand = 0.0;
+		}
 		// try to drive forward until the target area reaches our desired area
 		driveCommand = (DESIRED_TARGET_AREA - ta) * DRIVE_K;
 		SmartDashboard.putNumber("Limelight.DriveCommand", driveCommand);
