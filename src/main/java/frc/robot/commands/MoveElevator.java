@@ -42,8 +42,8 @@ public class MoveElevator extends Command {
         if (!OI.elev1.isLimDisable()) {          // If Limits are not disabled
             if (OI.lock.isLocked()) {              // And the wrist Lock is engaged
                 if (OI.elev1.lowerLimit()) {          // And the elevator is on lower limit switch
-                    if (motorSpeed > 0.3) {           // Then only let the operator push the elevator
-                           motorSpeed = 0.3;          // down (lift the bot) at up to 30% 
+                    if (motorSpeed > 0.2) {           // Then only let the operator push the elevator
+                           motorSpeed = 0.2;          // down (lift the bot) at up to 30% 
                        }
                   }
             } else {                               // The wrist lock is not engaged

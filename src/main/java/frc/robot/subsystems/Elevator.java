@@ -83,11 +83,11 @@ public class Elevator extends Subsystem {
         bLimit = new DigitalInput(RobotMap.elevLSwitchB);
 
         // Config motion magic stuff, use slot zero
-        elevatorMotor1.configMotionCruiseVelocity(3000); // 2000 native units per 100msec (about 2 seconds total)
-        elevatorMotor1.configMotionAcceleration(6000); // 4000 nup100msec/sec (.5 secs to cruise velocity)
+        elevatorMotor1.configMotionCruiseVelocity(8000); // 2000 native units per 100msec (about 2 seconds total)
+        elevatorMotor1.configMotionAcceleration(40000); // 4000 nup100msec/sec (.5 secs to cruise velocity)
         elevatorMotor1.config_kF(0,0.0);
-        elevatorMotor1.config_kP(0,0.2);     // Try 0.2 so need 10230 nu (~20 inches) of error to get full command
-        elevatorMotor1.config_kI(0,0.0004);  // Maybe try 0.0004 after running some tests
+        elevatorMotor1.config_kP(0,0.3);     // Try 0.2 so need 10230 nu (~20 inches) of error to get full command
+        elevatorMotor1.config_kI(0,0.0008);  // Maybe try 0.0004 after running some tests
         elevatorMotor1.config_kD(0,0.0);
         elevatorMotor1.configAllowableClosedloopError(0, 100); // Within +/-100 native units, is close enough (.3 inches)
         elevatorMotor1.config_IntegralZone(0, 1500);  // Only allow integral action with +/- 3 inches
@@ -143,8 +143,8 @@ public class Elevator extends Subsystem {
         // Get Elevator sensor info
         getElevatorDistance();
         getElevatorVelocity();
-        // elevatorMotor1.set(ControlMode.MotionMagic, elevMidPosition);
-        elevatorMotor1.set(ControlMode.MotionMagic, elevLowPosition, DemandType.ArbitraryFeedForward, elevBias);
+        elevatorMotor1.set(ControlMode.MotionMagic, elevLowPosition);
+        //elevatorMotor1.set(ControlMode.MotionMagic, elevLowPosition, DemandType.ArbitraryFeedForward, elevBias);
         elevCtrlMode.setDouble(1.0);
     }
 
@@ -152,8 +152,8 @@ public class Elevator extends Subsystem {
         // Get Elevator sensor info
         getElevatorDistance();
         getElevatorVelocity();
-        // elevatorMotor1.set(ControlMode.MotionMagic, elevMidPosition);
-        elevatorMotor1.set(ControlMode.MotionMagic, elevMidPosition, DemandType.ArbitraryFeedForward, elevBias);
+        elevatorMotor1.set(ControlMode.MotionMagic, elevMidPosition);
+        //elevatorMotor1.set(ControlMode.MotionMagic, elevMidPosition, DemandType.ArbitraryFeedForward, elevBias);
         elevCtrlMode.setDouble(2.0);
     }
 
@@ -161,8 +161,8 @@ public class Elevator extends Subsystem {
         // Get Elevator sensor info
         getElevatorDistance();
         getElevatorVelocity();
-        // elevatorMotor1.set(ControlMode.MotionMagic, elevMidPosition);
-        elevatorMotor1.set(ControlMode.MotionMagic, elevHighPosition, DemandType.ArbitraryFeedForward, elevBias);
+        elevatorMotor1.set(ControlMode.MotionMagic, elevHighPosition);
+        //elevatorMotor1.set(ControlMode.MotionMagic, elevHighPosition, DemandType.ArbitraryFeedForward, elevBias);
         elevCtrlMode.setDouble(3.0);
     }
 

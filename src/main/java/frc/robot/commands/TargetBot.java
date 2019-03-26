@@ -17,7 +17,7 @@ public class TargetBot extends Command {
 	private static double DESIRED_TARGET_AREA = 4; // Area of the target when the robot reaches the wall
 	private static double DRIVE_K = 0.15; // how hard to drive fwd toward the target
 	private static double STEER_K = 0.055; // how hard to turn toward the target
-	private static double X_OFFSET = 1.0;  // The number of degrees camera is off center
+	private static double X_OFFSET = 1.45;  // 1.45 The number of degrees camera is off center
 
 	// The following fields are updated by the LimeLight Camera
 	private boolean hasValidTarget = false;
