@@ -25,7 +25,7 @@ public class Elevator extends Subsystem {
                                               // these must be NEGATIVE
     private double elevMidPosition = -19600;  // Set the mid position for the elevator, note
                                               // these must be NEGATIVE
-    private double elevHighPosition = -36500; // Set the high position for the elevator, note
+    private double elevHighPosition = -37300; // Set the high position for the elevator, note
                                               // these must be NEGATIVE
 
     // Elevator talons
