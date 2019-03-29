@@ -21,11 +21,11 @@ public class Elevator extends Subsystem {
     private boolean elevLimDisDef = false;
     private double elevUpperLimit = 39500;    // Competiton bot upper limit was 39500 is Wtbry
     private double elevUpperReading = 55000;  // Above this the disreguard the elevator encoder
-    private double elevLowPosition = -600;  // Set the low position for the elevator, note
+    private double elevLowPosition = 0;  // Set the low position for the elevator, note
                                               // these must be NEGATIVE
     private double elevMidPosition = -19600;  // Set the mid position for the elevator, note
                                               // these must be NEGATIVE
-    private double elevHighPosition = -37300; // Set the high position for the elevator, note
+    private double elevHighPosition = -34000; // 34000 for in school hallway usually: -37300; // Set the high position for the elevator, note
                                               // these must be NEGATIVE
 
     // Elevator talons
@@ -84,10 +84,11 @@ public class Elevator extends Subsystem {
 
         // Config motion magic stuff, use slot zero
         elevatorMotor1.configMotionCruiseVelocity(8000); // 2000 native units per 100msec (about 2 seconds total)
-        elevatorMotor1.configMotionAcceleration(40000); // 4000 nup100msec/sec (.5 secs to cruise velocity)
+        elevatorMotor1.configMotionAcceleration(30000); // 4000 nup100msec/sec (.5 secs to cruise velocity)
         elevatorMotor1.config_kF(0,0.0);
         elevatorMotor1.config_kP(0,0.3);     // Try 0.2 so need 10230 nu (~20 inches) of error to get full command
-        elevatorMotor1.config_kI(0,0.0008);  // Maybe try 0.0004 after running some tests
+        //elevatorMotor1.config_kI(0,0.0008);  // Maybe try 0.0004 after running some tests
+        elevatorMotor1.config_kI(0,0.000);  // Maybe try 0.0004 after running some tests
         elevatorMotor1.config_kD(0,0.0);
         elevatorMotor1.configAllowableClosedloopError(0, 100); // Within +/-100 native units, is close enough (.3 inches)
         elevatorMotor1.config_IntegralZone(0, 1500);  // Only allow integral action with +/- 3 inches
@@ -143,8 +144,8 @@ public class Elevator extends Subsystem {
         // Get Elevator sensor info
         getElevatorDistance();
         getElevatorVelocity();
-        elevatorMotor1.set(ControlMode.MotionMagic, elevLowPosition);
-        //elevatorMotor1.set(ControlMode.MotionMagic, elevLowPosition, DemandType.ArbitraryFeedForward, elevBias);
+        //elevatorMotor1.set(ControlMode.MotionMagic, elevLowPosition);
+        elevatorMotor1.set(ControlMode.MotionMagic, elevLowPosition, DemandType.ArbitraryFeedForward, elevBias);
         elevCtrlMode.setDouble(1.0);
     }
 
@@ -152,8 +153,8 @@ public class Elevator extends Subsystem {
         // Get Elevator sensor info
         getElevatorDistance();
         getElevatorVelocity();
-        elevatorMotor1.set(ControlMode.MotionMagic, elevMidPosition);
-        //elevatorMotor1.set(ControlMode.MotionMagic, elevMidPosition, DemandType.ArbitraryFeedForward, elevBias);
+        //elevatorMotor1.set(ControlMode.MotionMagic, elevMidPosition);
+        elevatorMotor1.set(ControlMode.MotionMagic, elevMidPosition, DemandType.ArbitraryFeedForward, elevBias);
         elevCtrlMode.setDouble(2.0);
     }
 
@@ -161,8 +162,8 @@ public class Elevator extends Subsystem {
         // Get Elevator sensor info
         getElevatorDistance();
         getElevatorVelocity();
-        elevatorMotor1.set(ControlMode.MotionMagic, elevHighPosition);
-        //elevatorMotor1.set(ControlMode.MotionMagic, elevHighPosition, DemandType.ArbitraryFeedForward, elevBias);
+        //elevatorMotor1.set(ControlMode.MotionMagic, elevHighPosition);
+        elevatorMotor1.set(ControlMode.MotionMagic, elevHighPosition, DemandType.ArbitraryFeedForward, elevBias);
         elevCtrlMode.setDouble(3.0);
     }
 

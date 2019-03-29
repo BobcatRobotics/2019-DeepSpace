@@ -14,10 +14,10 @@ import frc.robot.lib.RioLogger;
 import frc.robot.lib.RioLoggerThread;
 
 public class TargetBot extends Command {
-	private static double DESIRED_TARGET_AREA = 4; // Area of the target when the robot reaches the wall
-	private static double DRIVE_K = 0.15; // how hard to drive fwd toward the target
-	private static double STEER_K = 0.055; // how hard to turn toward the target
-	private static double X_OFFSET = 1.45;  // 1.45 The number of degrees camera is off center
+	private static double DESIRED_TARGET_AREA = 3.5; // Area of the target when the robot reaches the wall
+	private static double DRIVE_K = 0.15; // 0.15 how hard to drive fwd toward the target
+	private static double STEER_K = 0.035; // how hard to turn toward the target
+	private static double X_OFFSET = 0.0;  // 1.45 The number of degrees camera is off center
 
 	// The following fields are updated by the LimeLight Camera
 	private boolean hasValidTarget = false;
@@ -53,13 +53,14 @@ public class TargetBot extends Command {
 		
 		//Determine left and right targets for more agressive steering
 		double steerAdjustLeft = 0.0;
-		double steerAdjustRight = 0.0;
-		if(leftTarget > rightTarget){
-			steerAdjustLeft = 0.15;
-		}
-		if (rightTarget > leftTarget){
-			steerAdjustRight = 0.15;
-		}
+		double steerAdjustRight = -0.18;
+		// if(leftTarget > rightTarget){
+		// 	steerAdjustLeft = 0.15;
+		// }
+		// if (rightTarget > leftTarget){
+		// 	steerAdjustRight = 0.15;
+		// }
+	
 
 
 
