@@ -31,7 +31,7 @@ public class WristDeployed extends Command {
 
     @Override
     protected boolean isFinished() {
-        RioLogger.errorLog("WristDeployed.isFinished() called. Returning true.");
+        RioLogger.errorLog("WristDeployed.isFinished() called. Returning true if TimedOut.");
         return isTimedOut();
     }
 

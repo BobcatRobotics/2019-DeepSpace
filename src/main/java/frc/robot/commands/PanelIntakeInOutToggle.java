@@ -5,7 +5,8 @@ import frc.robot.OI;
 import frc.robot.lib.RioLogger;
 
 public class PanelIntakeInOutToggle extends Command {
-    PanelPullInOnToggle panelPullInOnToggle;
+    private PanelPullInOnToggle panelPullInOnToggle;
+    private int currentWristState;
 
     public PanelIntakeInOutToggle() {
         super();
@@ -15,13 +16,25 @@ public class PanelIntakeInOutToggle extends Command {
 
     @Override
     protected void initialize() {
+        // Get current wrist state
+        currentWristState = OI.wrist.getWristState();
+        // If current wrist state is deployed (2)
+        // don't bother spinning wheels, any other state, do it.
+        if (currentWristState != 2) {
             panelPullInOnToggle = new PanelPullInOnToggle();
             panelPullInOnToggle.start();
+        }
     }
 
     @Override
     protected void execute() {
-        OI.panel.panelInOutToggle();
+        // If the current wrist state is deployed (2)
+        // then don't toggle the panel intake,
+        // let it stay in (driven in WristDeployed()
+        // by PanelInOutSetToIn()).  Any other state, do it.
+        if (currentWristState != 2) {
+            OI.panel.panelInOutToggle();
+        }
     }
 
     @Override
