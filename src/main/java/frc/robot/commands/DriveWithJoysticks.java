@@ -27,12 +27,12 @@ public class DriveWithJoysticks extends Command {
 		// Driving
 		left = OI.leftStick.getRawAxis(Joystick.AxisType.kY.value);
 		right = OI.rightStick.getRawAxis(Joystick.AxisType.kY.value);
-		if (Math.abs(right) < 0.02) {
+		if (Math.abs(right) < 0.08) {
 			right = 0.0;
 			//done to prevent motor wear, in case of joystick doesn't center
 		}
 
-		if (Math.abs(left) < 0.02) {
+		if (Math.abs(left) < 0.08) {
 			left = 0.0;
 			//done to prevent motor wear, in case of joystick doesn't center
 		}

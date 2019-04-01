@@ -12,15 +12,12 @@ import frc.robot.OI;
 import frc.robot.RobotMap;
 import frc.robot.lib.RioLogger;
 import frc.robot.lib.RioLoggerThread;
-import frc.robot.subsystems.DriveTrain;
-import edu.wpi.first.wpilibj.Joystick;
 
-
-public class TargetBot extends Command {
-	private static double DESIRED_TARGET_AREA = 4.6; // Area of the target when the robot reaches the wall
+public class TargetBotLevel2 extends Command {
+	private static double DESIRED_TARGET_AREA = 4.8; // Area of the target when the robot reaches the wall
 	private static double DRIVE_K = 0.15; // 0.15 how hard to drive fwd toward the target
 	private static double STEER_K = 0.035; // how hard to turn toward the target
-	private static double X_OFFSET = 0.0; // 1.45 The number of degrees camera is off center
+	private static double X_OFFSET = 0.0;  // 1.45 The number of degrees camera is off center
 
 	// The following fields are updated by the LimeLight Camera
 	private boolean hasValidTarget = false;
@@ -29,15 +26,19 @@ public class TargetBot extends Command {
 
 	// The following fields are updated by the state of the Command
 	private boolean ledsON = false;
-	private boolean isTargeting = false;
+	private TargetMode mode = TargetMode.TARGET;
+	private int timeCounter = 0;
+	private static int TIME_COUNT_LOOP = 50; // 50 times / second
+	private static double TA_DISTANCE = 2.0;
 	private Log log = new Log();
 
-	public TargetBot() {
+	public TargetBotLevel2() {
 		super();
 		requires(OI.driveTrain);
 		requires(OI.limelight);
+		requires(OI.elev1);
 		initializeCommand();
-		RioLogger.errorLog("TargetSkatebot Command Initialized");
+		RioLogger.errorLog("TargetBotLevel2 Command Initialized");
 	}
 
 	@Override
@@ -46,60 +47,58 @@ public class TargetBot extends Command {
 		if (!ledsON) {
 			OI.limelight.turnOnLED();
 			ledsON = true;
-			RioLogger.log("TargetSkateBot.execute() LED turned on");
+			RioLogger.log("TargetBotLevel2.execute() LED turned on");
+			mode = TargetMode.TARGET;
 		}
 
-		// Driving
-		Update_Limelight_Tracking();
-		double leftTarget = OI.limelight.leftTarget();
-		double rightTarget = OI.limelight.rightTarget();
+		// Targeting 
+		if (mode == TargetMode.TARGET) {
+			SmartDashboard.putString("Limelight.Target Mode = ","Target");
+			Update_Limelight_Tracking();
+			//Determine left and right targets for more agressive steering
+			double steerAdjustLeft = 0.0;
+			double steerAdjustRight = -0.18;
+			double leftPwr = (driveCommand + steerCommand + steerAdjustLeft) * -1.0;
+			double rightPwr = (driveCommand - steerCommand - steerAdjustRight) * -1.0;
+	
+			OI.driveTrain.setLeftPower(leftPwr);
+			OI.driveTrain.setRightPower(rightPwr);
+			OI.driveTrain.drive();
+			SmartDashboard.putBoolean("Limelight.TargetIdentified", hasValidTarget);
+			SmartDashboard.putNumber("LimeLight.RightPower", rightPwr);
+			SmartDashboard.putNumber("LimeLight.LeftPower", leftPwr); 
 
-		// Determine left and right targets for more agressive steering
-		double steerAdjustLeft = 0.0;
-		double steerAdjustRight = 0.0; // -0.18
-		// if(leftTarget > rightTarget){
-		// steerAdjustLeft = 0.15;
-		// }
-		// if (rightTarget > leftTarget){
-		// steerAdjustRight = 0.15;
-		// }
-		steerCommand = steerCommand * 1.1;
-
-		driveCommand = OI.leftStick.getRawAxis(Joystick.AxisType.kY.value) * -1.0;
-
-		double leftPwr = (driveCommand + steerCommand + steerAdjustLeft) * -1.0;
-		double rightPwr = (driveCommand - steerCommand - steerAdjustRight) * -1.0;
-
-		OI.driveTrain.setLeftPower(leftPwr);
-		OI.driveTrain.setRightPower(rightPwr);
-		OI.driveTrain.drive();
-		SmartDashboard.putBoolean("Limelight.TargetIdentified", hasValidTarget);
-		SmartDashboard.putNumber("LimeLight.RightPower", rightPwr);
-		SmartDashboard.putNumber("LimeLight.LeftPower", leftPwr);
-
-		log.leftPwr = leftPwr;
-		log.rightPwr = rightPwr;
+			if (OI.limelight.targetArea()  > TA_DISTANCE) {
+				mode = TargetMode.ELEVATOR;
+			}
+		}
+		if (mode ==  TargetMode.ELEVATOR) {
+			SmartDashboard.putString("Limelight.Target Mode = ","Elevator");
+			OI.elev1.goToMid();
+			mode = TargetMode.DRIVE;
+			timeCounter = 0;
+		}
+		if (mode == TargetMode.DRIVE) {
+			OI.driveTrain.drive(0.2, 0.2); // Drive Straight
+			timeCounter++;
+			if (timeCounter > TIME_COUNT_LOOP)
+				mode = TargetMode.END;
+		}
 		RioLoggerThread.log(log.logLine());
 	}
 
 	@Override
 	protected boolean isFinished() {
 		boolean stop = false;
-		// if (isTargeting) {
-		// if (!hasValidTarget) {
-		// stop = true;
-		// }
-		// if (speedToTarget < 0.01) {
-		// stop = true;
-		// }
-		// }
 		if (!OI.rightStick.getRawButton(RobotMap.targetBot)) {
 			stop = true;
 		}
+		if (mode == TargetMode.END) {
+			stop = true;
+		}
 		// if((DESIRED_TARGET_AREA - OI.limelight.targetArea()) <= 0){
-		// stop = true;
+		// 	stop = true;
 		// }
-		OI.driveTrain.setCoastMode();
 		return stop;
 	}
 
@@ -107,7 +106,7 @@ public class TargetBot extends Command {
 	protected void end() {
 		OI.driveTrain.stop();
 		OI.limelight.turnOffLED();
-		RioLogger.errorLog("TargetSkateBot command finished.");
+		RioLogger.errorLog("TargetBotLevel2 command finished.");
 		initializeCommand();
 	}
 
@@ -116,39 +115,30 @@ public class TargetBot extends Command {
 	 * commands based on the tracking data from a limelight camera.
 	 */
 	public void Update_Limelight_Tracking() {
-		// double drive_k = 0.13;
-		// double steer_k = 0.012;
-		// Tunning parameters
+		//double drive_k = 0.13;
+		//double steer_k = 0.012;
+		//Tunning parameters
 
 		hasValidTarget = OI.limelight.hasTargets();
 		if (!hasValidTarget) {
-			driveCommand = 0.0;
-			steerCommand = 0.0;
 			return;
 		}
-		isTargeting = true;
 		// double ty = OI.limelight.y();
 		double tx = OI.limelight.x();
 		double ta = OI.limelight.targetArea();
-
+	
 		log.tx = tx;
 		log.ta = ta;
 
 		// Start with proportional steering
-		double targetAreaError = DESIRED_TARGET_AREA - ta;
 
 		steerCommand = (tx - X_OFFSET) * STEER_K;
-		// try to drive forward until the target area reaches our desired area
-		driveCommand = (targetAreaError) * DRIVE_K;
 		SmartDashboard.putNumber("Limelight.SteerCommand", steerCommand);
-		if (targetAreaError < 1) {
+		if( DESIRED_TARGET_AREA - ta < 1){
 			steerCommand = 0.0;
 		}
-		if (targetAreaError < 0) {
-			driveCommand = 0.0;
-			steerCommand = 0.0;
-		}
-
+		// try to drive forward until the target area reaches our desired area
+		driveCommand = (DESIRED_TARGET_AREA - ta) * DRIVE_K;
 		SmartDashboard.putNumber("Limelight.DriveCommand", driveCommand);
 
 		log.drvCmd = driveCommand;
@@ -157,8 +147,6 @@ public class TargetBot extends Command {
 
 	private void initializeCommand() {
 		ledsON = false;
-		isTargeting = false;
-		OI.driveTrain.setBrakeMode();
 	}
 
 	class Log {
@@ -174,4 +162,10 @@ public class TargetBot extends Command {
 		}
 	}
 
+    enum TargetMode {
+		TARGET,
+		ELEVATOR,
+		DRIVE,
+		END
+	} 
 }

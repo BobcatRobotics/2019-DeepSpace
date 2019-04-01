@@ -19,13 +19,13 @@ public class Elevator extends Subsystem {
     private double elevBiasDefault = -0.05;  // Competition was -0.04 at Waterbury
     private double elevScaleDefault = 1.0;   // Competition is 0.6 at Waterbury
     private boolean elevLimDisDef = false;
-    private double elevUpperLimit = 39500;    // Competiton bot upper limit was 39500 is Wtbry
+    private double elevUpperLimit = 42000;    // Competiton bot upper limit was 39500 is Wtbry
     private double elevUpperReading = 55000;  // Above this the disreguard the elevator encoder
     private double elevLowPosition = -600;  // Set the low position for the elevator, note
                                               // these must be NEGATIVE
     private double elevMidPosition = -19600;  // Set the mid position for the elevator, note
                                               // these must be NEGATIVE
-    private double elevHighPosition = -37300; // Set the high position for the elevator, note
+    private double elevHighPosition = -41000; // Set the high position for the elevator, note
                                               // these must be NEGATIVE
 
     // Elevator talons

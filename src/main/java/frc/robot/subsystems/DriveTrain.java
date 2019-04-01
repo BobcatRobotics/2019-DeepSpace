@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -30,6 +31,24 @@ public class DriveTrain extends Subsystem {
 		rightRear = new WPI_VictorSPX(RobotMap.driveRightMotorRear);
 		setLeftMotorsReverse(false);
 		RioLogger.log("DriveTrain() created.");
+		leftFront.configVoltageCompSaturation(12);
+		leftFront.enableVoltageCompensation(true);
+		leftMiddle.configVoltageCompSaturation(12);
+		leftMiddle.enableVoltageCompensation(true);
+		leftRear.configVoltageCompSaturation(12);
+		leftRear.enableVoltageCompensation(true);
+		rightFront.configVoltageCompSaturation(12);
+		rightFront.enableVoltageCompensation(true);
+		rightMiddle.configVoltageCompSaturation(12);
+		rightMiddle.enableVoltageCompensation(true);
+		rightRear.configVoltageCompSaturation(12);
+		rightRear.enableVoltageCompensation(true);
+		leftFront.setNeutralMode(NeutralMode.Coast);
+		leftMiddle.setNeutralMode(NeutralMode.Coast);
+		leftRear.setNeutralMode(NeutralMode.Coast);
+		rightFront.setNeutralMode(NeutralMode.Coast);
+		rightMiddle.setNeutralMode(NeutralMode.Coast);
+		rightRear.setNeutralMode(NeutralMode.Coast);
 	}
 	
 	// Put methods for controlling this subsystem here. Call these from Commands.
@@ -97,6 +116,24 @@ public class DriveTrain extends Subsystem {
 	public void reset() {
 		leftPower = 0.0;
 		rightPower = 0.0;
+	}
+	
+	public void setBrakeMode(){
+		leftFront.setNeutralMode(NeutralMode.Coast);
+		leftMiddle.setNeutralMode(NeutralMode.Coast);
+		leftRear.setNeutralMode(NeutralMode.Coast);
+		rightFront.setNeutralMode(NeutralMode.Coast);
+		rightMiddle.setNeutralMode(NeutralMode.Coast);
+		rightRear.setNeutralMode(NeutralMode.Coast);
+	}
+
+	public void setCoastMode(){
+		leftFront.setNeutralMode(NeutralMode.Brake);
+		leftMiddle.setNeutralMode(NeutralMode.Brake);
+		leftRear.setNeutralMode(NeutralMode.Brake);
+		rightFront.setNeutralMode(NeutralMode.Brake);
+		rightMiddle.setNeutralMode(NeutralMode.Brake);
+		rightRear.setNeutralMode(NeutralMode.Brake);
 	}
 
 	@Override
