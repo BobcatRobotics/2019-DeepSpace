@@ -55,20 +55,32 @@ public class TargetBot extends Command {
 		double rightTarget = OI.limelight.rightTarget();
 
 		// Determine left and right targets for more agressive steering
-		double steerAdjustLeft = 0.0;
-		double steerAdjustRight = 0.0; // -0.18
-		// if(leftTarget > rightTarget){
-		// steerAdjustLeft = 0.15;
-		// }
-		// if (rightTarget > leftTarget){
-		// steerAdjustRight = 0.15;
-		// }
-		steerCommand = steerCommand * 1.1;
+		double minLeftPwr = 0.18;
+		double minRightPwr = 0.18; // -0.18
+		
 
 		driveCommand = OI.leftStick.getRawAxis(Joystick.AxisType.kY.value) * -1.0;
 
-		double leftPwr = (driveCommand + steerCommand + steerAdjustLeft) * -1.0;
-		double rightPwr = (driveCommand - steerCommand - steerAdjustRight) * -1.0;
+		double steerCommandSign = Math.signum(steerCommand);
+		double minSteerCommand = 0.14;
+		if(Math.abs(steerCommand) < minSteerCommand){
+			steerCommand = minSteerCommand * steerCommandSign;
+		}
+
+		double leftPwr = (driveCommand + steerCommand ) * -1.0;
+		double rightPwr = (driveCommand - steerCommand ) * -1.0;
+
+		// double leftSign = Math.signum(leftPwr);
+		// double rightSign = Math.signum(rightPwr);
+
+		// if(Math.abs(leftPwr) < minLeftPwr){
+		// 	leftPwr = minLeftPwr * leftSign;
+		// }
+		// if(Math.abs(rightPwr) < minRightPwr){
+		// 	rightPwr = minRightPwr * rightSign;
+		// }
+
+
 
 		OI.driveTrain.setLeftPower(leftPwr);
 		OI.driveTrain.setRightPower(rightPwr);

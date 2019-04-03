@@ -144,6 +144,9 @@ public class Elevator extends Subsystem {
         getElevatorDistance();
         getElevatorVelocity();
         elevatorMotor1.set(ControlMode.MotionMagic, elevLowPosition);
+        if(!limitsDisabled && lowerLimit()){
+            elevatorMotor1.set(ControlMode.PercentOutput, elevatorCmd);
+        }
         //elevatorMotor1.set(ControlMode.MotionMagic, elevLowPosition, DemandType.ArbitraryFeedForward, elevBias);
         elevCtrlMode.setDouble(1.0);
     }
