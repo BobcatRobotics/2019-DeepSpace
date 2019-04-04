@@ -55,14 +55,14 @@ public class TargetBot extends Command {
 		double rightTarget = OI.limelight.rightTarget();
 
 		// Determine left and right targets for more agressive steering
-		double minLeftPwr = 0.18;
-		double minRightPwr = 0.18; // -0.18
+		double minLeftPwr = 0.05;
+		double minRightPwr = 0.05; // -0.18
 		
 
 		driveCommand = OI.leftStick.getRawAxis(Joystick.AxisType.kY.value) * -1.0;
 
 		double steerCommandSign = Math.signum(steerCommand);
-		double minSteerCommand = 0.14;
+		double minSteerCommand = 0.15;
 		if(Math.abs(steerCommand) < minSteerCommand){
 			steerCommand = minSteerCommand * steerCommandSign;
 		}

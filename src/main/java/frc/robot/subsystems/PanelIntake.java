@@ -1,7 +1,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Solenoid;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+// import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.lib.RioLogger;
@@ -9,14 +10,16 @@ import frc.robot.lib.RioLogger;
 public class PanelIntake extends Subsystem {
     private Solenoid solenoid1;
     private Solenoid solenoid2;
-    private WPI_VictorSPX panelMotor;
+    // private WPI_VictorSPX panelMotor; // Was Victor
+    private WPI_TalonSRX panelMotor;     // Now talon if we want current limiting
     private boolean panelInOutState=false;
     private double panelSpeed = 0.0;
 
     public PanelIntake() {
         solenoid1 = new Solenoid(RobotMap.panelGripSolenoid);
         solenoid2 = new Solenoid(RobotMap.panelInOutSolenoid);
-        panelMotor = new WPI_VictorSPX(RobotMap.panelIntakeMotor);
+        // panelMotor = new WPI_VictorSPX(RobotMap.panelIntakeMotor); // Was Victor
+        panelMotor = new WPI_TalonSRX(RobotMap.panelIntakeMotor);
         RioLogger.errorLog("PanelIntake() Created.");
     }
 
