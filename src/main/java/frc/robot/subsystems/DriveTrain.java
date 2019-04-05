@@ -136,6 +136,17 @@ public class DriveTrain extends Subsystem {
 		rightRear.setNeutralMode(NeutralMode.Brake);
 	}
 
+	public void setVoltageComp(double voltageComp){
+		leftFront.configVoltageCompSaturation(voltageComp);
+		leftMiddle.configVoltageCompSaturation(voltageComp);
+		leftRear.configVoltageCompSaturation(voltageComp);
+		rightFront.configVoltageCompSaturation(voltageComp);
+		rightMiddle.configVoltageCompSaturation(voltageComp);
+		rightRear.configVoltageCompSaturation(voltageComp);
+
+
+	}
+
 	@Override
 	public void initDefaultCommand() {
 	  // Set the default command for a subsystem here.

@@ -19,7 +19,8 @@ import edu.wpi.first.wpilibj.Joystick;
 public class TargetBot extends Command {
 	private static double DESIRED_TARGET_AREA = 4.6; // Area of the target when the robot reaches the wall
 	private static double DRIVE_K = 0.15; // 0.15 how hard to drive fwd toward the target
-	private static double STEER_K = 0.035; // how hard to turn toward the target
+	private static double STEER_K = 0.035; // 0.35 how hard to turn toward the target
+	private static double STEER_I = 0.01;
 	private static double X_OFFSET = 0.0; // 1.45 The number of degrees camera is off center
 
 	// The following fields are updated by the LimeLight Camera
@@ -55,8 +56,10 @@ public class TargetBot extends Command {
 		double rightTarget = OI.limelight.rightTarget();
 
 		// Determine left and right targets for more agressive steering
-		double minLeftPwr = 0.05;
-		double minRightPwr = 0.05; // -0.18
+		double minLeftPwr = 0.06;
+		double minRightPwr = 0.06; // -0.18
+
+	
 		
 
 		driveCommand = OI.leftStick.getRawAxis(Joystick.AxisType.kY.value) * -1.0;
@@ -67,19 +70,17 @@ public class TargetBot extends Command {
 			steerCommand = minSteerCommand * steerCommandSign;
 		}
 
-		double leftPwr = (driveCommand + steerCommand ) * -1.0;
-		double rightPwr = (driveCommand - steerCommand ) * -1.0;
+		double driveSign = Math.signum(driveCommand);
 
-		// double leftSign = Math.signum(leftPwr);
-		// double rightSign = Math.signum(rightPwr);
+		double leftBias = driveSign * 0.00;
+		double rightBias = driveSign * 0.05;
+		
 
-		// if(Math.abs(leftPwr) < minLeftPwr){
-		// 	leftPwr = minLeftPwr * leftSign;
-		// }
-		// if(Math.abs(rightPwr) < minRightPwr){
-		// 	rightPwr = minRightPwr * rightSign;
-		// }
 
+		double leftPwr = (driveCommand + steerCommand  + leftBias) * -1.0;
+		double rightPwr = (driveCommand - steerCommand + rightBias ) * -1.0;
+
+	
 
 
 		OI.driveTrain.setLeftPower(leftPwr);
@@ -111,7 +112,6 @@ public class TargetBot extends Command {
 		// if((DESIRED_TARGET_AREA - OI.limelight.targetArea()) <= 0){
 		// stop = true;
 		// }
-		OI.driveTrain.setCoastMode();
 		return stop;
 	}
 
@@ -120,6 +120,8 @@ public class TargetBot extends Command {
 		OI.driveTrain.stop();
 		OI.limelight.turnOffLED();
 		RioLogger.errorLog("TargetSkateBot command finished.");
+		//OI.driveTrain.setCoastMode();
+		OI.driveTrain.setVoltageComp(12);
 		initializeCommand();
 	}
 
@@ -170,7 +172,9 @@ public class TargetBot extends Command {
 	private void initializeCommand() {
 		ledsON = false;
 		isTargeting = false;
-		OI.driveTrain.setBrakeMode();
+		//OI.driveTrain.setBrakeMode();
+		double voltageComp = 9;
+		OI.driveTrain.setVoltageComp(voltageComp);
 	}
 
 	class Log {

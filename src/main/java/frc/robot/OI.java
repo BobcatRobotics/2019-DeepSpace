@@ -78,7 +78,7 @@ public class OI {
     // Start Logging Thread
     // logFile = RioLoggerThread.getInstance();
     // Initialize Camera
-    camera.initializeCamera();
+    //camera.initializeCamera();
     limelight.initializeLimeLight();
     RioLogger.errorLog("limeLight camera is initialized.");
 
