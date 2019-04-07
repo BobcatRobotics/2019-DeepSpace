@@ -26,6 +26,7 @@ public class Robot extends TimedRobot {
   static OI oi = new OI();
   static boolean commandsStarted = false;
   static boolean loggerInit = false;
+  static boolean wasInAutoPeriodic = false;
   // Thread m_visionThread;
 
   // Command m_autonomousCommand;
@@ -38,6 +39,7 @@ public class Robot extends TimedRobot {
     m_DriveWithJoysticks = new DriveWithJoysticks();
     m_MoveElevator = new MoveElevator();
     panelIntakeOut = new PanelIntakeOut();
+    wasInAutoPeriodic = false;
   }
 
   @Override
@@ -53,7 +55,10 @@ public class Robot extends TimedRobot {
     // Turn Limits back on
     OI.elev1.setLmitDisableStatusFalse();
     // Command panel intake to in position
-    OI.panel.panelInOutSetToIn();
+    if (!wasInAutoPeriodic) {
+      OI.panel.panelInOutSetToIn();
+    }
+    wasInAutoPeriodic = false;
     // Command wrist to be in stowed position
     OI.wrist.stow();
     // Turn off limelight LEDs
@@ -80,12 +85,14 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    wasInAutoPeriodic = true;
  }
 
   @Override
   public void teleopInit() {
     startCommands();
     OI.lock.disable();
+    panelIntakeOut.start();
     if (!loggerInit) {
       RioLoggerThread.getInstance();
       RioLoggerThread.setLoggingParameters(600, 60); // 10 mins, 1 min
