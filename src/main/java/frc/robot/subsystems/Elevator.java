@@ -16,7 +16,7 @@ import frc.robot.lib.RioLogger;
 
 
 public class Elevator extends Subsystem {
-    private double elevBiasDefault = -0.08;  // Competition was -0.04 at Waterbury
+    private double elevBiasDefault = -0.06;  // Competition was -0.04 at Waterbury
                                              // -.05 ar hrtfrd,  -0.08 at ne champs with elastic
     private double elevScaleDefault = 1.0;   // Competition is 0.6 at Waterbury
     private boolean elevLimDisDef = false;
