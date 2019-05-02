@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.commands.DriveWithJoysticks;
 import frc.robot.commands.MoveElevator;
 import frc.robot.commands.PanelIntakeOut;
+import frc.robot.commands.ShiftHigh;
 import frc.robot.lib.RioLoggerThread;
 
 /**
@@ -23,6 +24,7 @@ import frc.robot.lib.RioLoggerThread;
  */
 public class Robot extends TimedRobot {
   PanelIntakeOut panelIntakeOut;
+  ShiftHigh shiftHigh;
   static OI oi = new OI();
   static boolean commandsStarted = false;
   static boolean loggerInit = false;
@@ -39,6 +41,7 @@ public class Robot extends TimedRobot {
     m_DriveWithJoysticks = new DriveWithJoysticks();
     m_MoveElevator = new MoveElevator();
     panelIntakeOut = new PanelIntakeOut();
+    shiftHigh = new ShiftHigh();
     wasInAutoPeriodic = false;
   }
 
@@ -50,6 +53,8 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     // If we go to disabled, put most things to their
     // default state of command (since they will be disabled)
+    // Set drive train to brake mode
+    OI.driveTrain.setBrakeMode();
     // Set elevator motors to coast mode
     OI.elev1.setElevCoastMode();
     // Turn Limits back on
@@ -77,9 +82,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    // Set drive train to coast mode
+    OI.driveTrain.setCoastMode();
     startCommands();
     OI.lock.disable();
     panelIntakeOut.start();
+    shiftHigh.start();
    }
 
   @Override
@@ -90,9 +98,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    // Set drive train to coast mode
+    OI.driveTrain.setCoastMode();
     startCommands();
     OI.lock.disable();
     panelIntakeOut.start();
+    shiftHigh.start();
     if (!loggerInit) {
       RioLoggerThread.getInstance();
       RioLoggerThread.setLoggingParameters(600, 60); // 10 mins, 1 min

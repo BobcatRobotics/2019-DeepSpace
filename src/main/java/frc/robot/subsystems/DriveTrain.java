@@ -119,21 +119,21 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void setBrakeMode(){
-		leftFront.setNeutralMode(NeutralMode.Coast);
-		leftMiddle.setNeutralMode(NeutralMode.Coast);
-		leftRear.setNeutralMode(NeutralMode.Coast);
-		rightFront.setNeutralMode(NeutralMode.Coast);
-		rightMiddle.setNeutralMode(NeutralMode.Coast);
-		rightRear.setNeutralMode(NeutralMode.Coast);
-	}
-
-	public void setCoastMode(){
 		leftFront.setNeutralMode(NeutralMode.Brake);
 		leftMiddle.setNeutralMode(NeutralMode.Brake);
 		leftRear.setNeutralMode(NeutralMode.Brake);
 		rightFront.setNeutralMode(NeutralMode.Brake);
 		rightMiddle.setNeutralMode(NeutralMode.Brake);
 		rightRear.setNeutralMode(NeutralMode.Brake);
+	}
+
+	public void setCoastMode(){
+		leftFront.setNeutralMode(NeutralMode.Coast);
+		leftMiddle.setNeutralMode(NeutralMode.Coast);
+		leftRear.setNeutralMode(NeutralMode.Coast);
+		rightFront.setNeutralMode(NeutralMode.Coast);
+		rightMiddle.setNeutralMode(NeutralMode.Coast);
+		rightRear.setNeutralMode(NeutralMode.Coast);
 	}
 
 	public void setVoltageComp(double voltageComp){

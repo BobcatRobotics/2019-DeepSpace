@@ -12,8 +12,8 @@ public class ShiftHigh extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        shifterState = false;
-        // DriverStation.reportError(" In ShiftHigh, shifterState = " + shifterState,false);
+        shifterState = true;
+        // DriverStation.reportError(" In ShiftHigh, shifterState = " + shifterState,true);
         OI.shifter.set(shifterState);
     }
 
