@@ -49,14 +49,14 @@ public class MoveElevator extends Command {
                     // by .3 to give the operator's thumb stick full travel to get to 30%
                     // if he wants to adjust how hard we push down after we've climbed.
                     if (motorSpeed > 0.0) {
-                        motorSpeed = motorSpeed * 0.3;
+                        motorSpeed = motorSpeed * 0.10;
                     }
                   }
             } else {                               // The wrist lock is not engaged
                 if (motorSpeed > 0.7) {               // Limit the elevator drive down command
                     motorSpeed = 0.7;                 // to maxDownCmd when limits enabled & not trying
                 }                                     // to climb (not locked).
-                if (OI.elev1.lowerLimit()) {          // And the elevator is on the lower limit switch
+            if (OI.elev1.lowerLimit()) {          // And the elevator is on the lower limit switch
                     if (motorSpeed > 0.0) {           // Then don't let the operator push the elevator
                            motorSpeed = 0.0;          // down anymore.
                        }
